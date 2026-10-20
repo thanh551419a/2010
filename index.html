@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Món Quà 20/10 Dành Riêng Cho Em 🍓🐰</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky-top: #ffd6e6;
+      --sky-mid: #ffeaf2;
+      --sky-warm: #fff5ea;
+      --text-dark: #572639;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background: #ffe5ef;
+      font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text-dark);
+    }
+
+    /* ==========================================================================
+       FULL-VIEWPORT 3D ENVIRONMENT
+       ========================================================================== */
+    #viewportWorld {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      perspective: 1100px;
+      background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 52%, var(--sky-warm) 100%);
+      transition: filter 1.2s ease, background 1.5s ease;
+    }
+
+    #viewportWorld.warm-bloom {
+      background: linear-gradient(180deg, #ffc8df 0%, #ffe3ee 48%, #fff1df 100%);
+    }
+
+    #hugWarmAura {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 19;
+      background: radial-gradient(circle at 50% 52%, transparent 35%, rgba(255, 130, 175, 0.35) 100%);
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    #hugWarmAura.active {
+      opacity: 1;
+      animation: auraPulse 2.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes auraPulse {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    .sky-glow {
+      position: absolute;
+      top: -15%;
+      left: 50%;
+      width: 110vw;
+      height: 75vh;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(255,255,255,0.88) 0%, rgba(255,220,235,0.42) 45%, transparent 72%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Drifting 3D Pastel Clouds */
+    .cloud-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .cloud {
+      position: absolute;
+      background: linear-gradient(180deg, #ffffff 0%, #ffe9f2 100%);
+      border-radius: 999px;
+      box-shadow: 0 14px 28px rgba(215, 130, 160, 0.16), inset 0 -6px 12px rgba(255, 195, 215, 0.45);
+      opacity: 0.88;
+      animation: floatCloud 26s ease-in-out infinite alternate;
+    }
+
+    .cloud::before, .cloud::after {
+      content: '';
+      position: absolute;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .cloud-1 { width: 170px; height: 54px; top: 9%; left: 7%; }
+    .cloud-1::before { width: 78px; height: 78px; top: -38px; left: 24px; }
+    .cloud-1::after { width: 62px; height: 62px; top: -26px; left: 82px; }
+
+    .cloud-2 { width: 210px; height: 64px; top: 13%; right: 8%; animation-duration: 32s; animation-delay: -6s; }
+    .cloud-2::before { width: 92px; height: 92px; top: -44px; left: 32px; }
+    .cloud-2::after { width: 74px; height: 74px; top: -30px; left: 100px; }
+
+    @keyframes floatCloud {
+      0% { transform: translateX(-18px) translateY(0); }
+      100% { transform: translateX(24px) translateY(-8px); }
+    }
+
+    /* ==========================================================================
+       CAMERA RIG & PARALLAX MEADOW HILLS
+       ========================================================================== */
+    #worldCamera {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      transition: transform 1.35s cubic-bezier(0.25, 0.9, 0.3, 1);
+      z-index: 4;
+    }
+
+    .hills-distant {
+      position: absolute;
+      bottom: 24%;
+      left: -15%;
+      width: 130%;
+      height: 36%;
+      background: linear-gradient(180deg, #f7d9e8 0%, #e7f4dc 55%, #d6ecc8 100%);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      box-shadow: inset 0 14px 30px rgba(255, 255, 255, 0.7);
+      z-index: 2;
+    }
+
+    .meadow-midground {
+      position: absolute;
+      bottom: -6%;
+      left: -12%;
+      width: 124%;
+      height: 46%;
+      background: radial-gradient(ellipse at 50% 15%, #eef9e3 0%, #d8f0c8 48%, #c2e5b0 100%);
+      border-radius: 48% 52% 0 0 / 60% 60% 0 0;
+      box-shadow: 0 -10px 32px rgba(170, 210, 150, 0.35), inset 0 18px 38px rgba(255, 255, 255, 0.75);
+      z-index: 3;
+    }
+
+    .garden-path {
+      position: absolute;
+      bottom: -4%;
+      left: 50%;
+      transform: translateX(-50%) perspective(350px) rotateX(52deg);
+      width: min(380px, 68vw);
+      height: 46vh;
+      background: linear-gradient(180deg, rgba(255, 238, 224, 0.55) 0%, rgba(255, 225, 210, 0.9) 100%);
+      border-radius: 50%;
+      filter: blur(4px);
+      z-index: 3;
+    }
+
+    #gardenFlowersBack, #gardenFlowersFront {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    #gardenFlowersBack { z-index: 4; }
+    #gardenFlowersFront { z-index: 16; }
+
+    .flower-item {
+      position: absolute;
+      transform-origin: bottom center;
+      animation: swayFlower 4.2s ease-in-out infinite alternate;
+      transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+    }
+
+    .flower-item.bud-closed {
+      transform: scale(0.32) translateY(20px);
+      opacity: 0.55;
+    }
+
+    .flower-item.bloomed {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    @keyframes swayFlower {
+      0% { rotate: -4deg; }
+      100% { rotate: 5deg; }
+    }
+
+    /* ==========================================================================
+       CENTER STAGE ACTORS
+       ========================================================================== */
+    #stageCenter {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* 1. 3D Envelope */
+    #envelopeActor {
+      position: absolute;
+      top: 53%;
+      left: 50%;
+      width: min(310px, 78vw);
+      height: min(205px, 52vw);
+      transform: translate(-50%, -50%);
+      transform-style: preserve-3d;
+      transition: transform 1s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.9s ease;
+      z-index: 8;
+    }
+
+    #envelopeActor.idle-Invite {
+      animation: envelopeInvite 3s ease-in-out infinite;
+    }
+
+    @keyframes envelopeInvite {
+      0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
+      50% { transform: translate(-50%, -50%) translateY(-8px) rotate(-1.2deg); }
+    }
+
+    .env-shadow {
+      position: absolute;
+      bottom: -24px;
+      left: 8%;
+      width: 84%;
+      height: 28px;
+      background: radial-gradient(ellipse, rgba(160, 75, 105, 0.28) 0%, transparent 72%);
+      border-radius: 50%;
+    }
+
+    .env-back {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #fff6ee 0%, #fde4d8 100%);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(175, 85, 115, 0.22), inset 0 2px 6px #ffffff;
+      border: 2px solid #f9d5c8;
+    }
+
+    .env-inner-glow {
+      position: absolute;
+      inset: 8px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 50% 35%, rgba(255, 120, 165, 0.85), transparent 72%);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    #envelopeActor.open .env-inner-glow {
+      opacity: 1;
+    }
+
+    .env-pocket {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .env-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 58%;
+      transform-origin: top center;
+      transition: transform 0.95s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s 0.4s;
+      z-index: 6;
+      filter: drop-shadow(0 6px 8px rgba(165, 80, 105, 0.15));
+    }
+
+    #envelopeActor.open .env-flap {
+      transform: rotateX(175deg);
+      z-index: 1;
+    }
+
+    #envelopeActor.fade-away {
+      transform: translate(-50%, 40%) scale(0.75);
+      opacity: 0;
+    }
+
+    /* ==========================================================================
+       2. STRAWBERRY BUNNY ACTOR
+       - Continuous Ear Flapping ("ve vẩy tai liên tục")
+       - Center Rummaging with Left/Right Push
+       - Under-heart Shoulder Roots + Over-heart Curved Forearms + Swaying ("lắc lư")
+       ========================================================================== */
+    #strawberryBunnyActor {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(345px, 85vw);
+      height: min(335px, 83vw);
+      transform: translate(-50%, -50%) scale(0.76);
+      transition: transform 0.85s cubic-bezier(0.34, 1.45, 0.64, 1), top 0.85s ease, left 0.85s ease;
+      z-index: 14;
+      pointer-events: none;
+    }
+
+    #strawberryBunnySvg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 16px 24px rgba(155, 55, 85, 0.22));
+    }
+
+    #sb-leaves-group {
+      transform-origin: 180px 72px;
+      animation: leafBreeze 2.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes leafBreeze {
+      0% { transform: rotate(-3deg); }
+      100% { transform: rotate(3deg); }
+    }
+
+    /* Two Independent Hooded Strawberry Wings / Ears (Anchored at Crown 180, 74) */
+    #sb-wing-left,
+    #sb-wing-right {
+      transform-origin: 180px 74px;
+      opacity: 0;
+    }
+
+    /* Continuous Ear-Flapping ("Ve vẩy tai trong suốt quá trình hiển thị text") */
+    #strawberryBunnyActor.ears-flapping #sb-wing-left {
+      opacity: 1;
+      animation: continuousEarFlapLeft 1.85s ease-in-out infinite;
+    }
+
+    #strawberryBunnyActor.ears-flapping #sb-wing-right {
+      opacity: 1;
+      animation: continuousEarFlapRight 1.85s ease-in-out infinite;
+    }
+
+    /* Faster Ear Flutter when Running or Rummaging */
+    #strawberryBunnyActor.ears-excited #sb-wing-left {
+      opacity: 1;
+      animation: happyEarFlapLeft 0.95s ease-in-out infinite;
+    }
+
+    #strawberryBunnyActor.ears-excited #sb-wing-right {
+      opacity: 1;
+      animation: happyEarFlapRight 0.95s ease-in-out infinite;
+    }
+
+    @keyframes continuousEarFlapLeft {
+      0%, 100% { transform: rotate(0deg) scaleX(1); }
+      45% { transform: rotate(8.5deg) translateY(-3px) scaleX(1.02); }
+      75% { transform: rotate(-2.2deg) translateY(1px) scaleX(0.99); }
+    }
+
+    @keyframes continuousEarFlapRight {
+      0%, 100% { transform: rotate(0deg) scaleX(1); }
+      45% { transform: rotate(-8.5deg) translateY(-3px) scaleX(1.02); }
+      75% { transform: rotate(2.2deg) translateY(1px) scaleX(0.99); }
+    }
+
+    @keyframes happyEarFlapLeft {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(12deg) translateY(-4px); }
+    }
+
+    @keyframes happyEarFlapRight {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-12deg) translateY(-4px); }
+    }
+
+    /* Articulated Bunny Head, Eyes, Regular Arms & Curved Hugging Arms */
+    #bunny-head-group {
+      transform-origin: 180px 150px;
+      transition: transform 0.5s ease;
+    }
+
+    #bunny-eyes {
+      transform-origin: 180px 151px;
+      animation: bunnyBlink 4.2s infinite;
+    }
+
+    @keyframes bunnyBlink {
+      0%, 92%, 98%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.12); }
+    }
+
+    /* Regular Plush Arms */
+    #bunny-arm-left {
+      transform-origin: 134px 196px;
+      transition: transform 0.45s cubic-bezier(0.34, 1.5, 0.64, 1), opacity 0.3s ease;
+      animation: armIdleLeft 2.8s ease-in-out infinite alternate;
+    }
+
+    #bunny-arm-right {
+      transform-origin: 226px 196px;
+      transition: transform 0.45s cubic-bezier(0.34, 1.5, 0.64, 1), opacity 0.3s ease;
+      animation: armIdleRight 2.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes armIdleLeft {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(5deg); }
+    }
+
+    @keyframes armIdleRight {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-5deg); }
+    }
+
+    /* Under-Heart Shoulder Attachment Roots (Strictly UNDER the Heart in Layer 1) */
+    #bunny-hug-shoulders-back {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    /* Over-Heart Curved Forearms & Paws (Wrapping Front of the Heart in Layer 4) */
+    #bunny-curved-hug-arms {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    #curved-arm-left {
+      transform-origin: 112px 218px;
+      transform: scaleX(0.6) rotate(22deg);
+      transition: transform 0.65s cubic-bezier(0.34, 1.45, 0.64, 1);
+    }
+
+    #curved-arm-right {
+      transform-origin: 248px 218px;
+      transform: scaleX(0.6) rotate(-22deg);
+      transition: transform 0.65s cubic-bezier(0.34, 1.45, 0.64, 1);
+    }
+
+    /* Held Glowing Heart Object */
+    #bunny-held-gift {
+      transform-origin: 180px 92px;
+      opacity: 0;
+      transform: translateY(75px) scale(0.2);
+      transition: transform 0.85s cubic-bezier(0.28, 1.45, 0.55, 1), opacity 0.45s ease;
+    }
+
+    /* --- BUNNY ACTION POSES --- */
+    /* Hop & Run */
+    #strawberryBunnyActor.hopping {
+      animation: bunnyRunHop 0.48s cubic-bezier(0.35, 0, 0.65, 1) infinite alternate;
+    }
+
+    @keyframes bunnyRunHop {
+      0% { transform: translate(-50%, -46%) scale(0.96, 1.04) rotate(-3deg); }
+      100% { transform: translate(-50%, -62%) scale(1.04, 0.96) rotate(3deg); }
+    }
+
+    /* Pose 1: Reaching Out with Both Hands to Untie & Open Gift Box */
+    #strawberryBunnyActor.opening-box {
+      transform: translate(-56%, -44%) scale(0.96) rotate(5deg);
+    }
+    #strawberryBunnyActor.opening-box #bunny-head-group {
+      transform: translateY(4px) rotate(6deg);
+    }
+    #strawberryBunnyActor.opening-box #bunny-arm-left {
+      animation: none;
+      transform: rotate(-45deg) translate(-4px, 8px);
+    }
+    #strawberryBunnyActor.opening-box #bunny-arm-right {
+      animation: none;
+      transform: rotate(-60deg) translate(10px, -4px);
+    }
+
+    /* Pose 2: Lifting & Presenting the Glowing Heart Up High */
+    #strawberryBunnyActor.lifting-gift {
+      transform: translate(-50%, -46%) scale(1.03);
+      animation: proudBounce 2.2s ease-in-out infinite alternate;
+    }
+    #strawberryBunnyActor.lifting-gift #bunny-arm-left {
+      animation: none;
+      transform: rotate(114deg) translate(-6px, -4px);
+    }
+    #strawberryBunnyActor.lifting-gift #bunny-arm-right {
+      animation: none;
+      transform: rotate(-114deg) translate(6px, -4px);
+    }
+    #strawberryBunnyActor.lifting-gift #bunny-head-group {
+      transform: translateY(-3px);
+    }
+    #strawberryBunnyActor.lifting-gift #bunny-held-gift {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+    }
+
+    @keyframes proudBounce {
+      0% { transform: translate(-50%, -45%) scale(1.02); }
+      100% { transform: translate(-50%, -49%) scale(1.05); }
+    }
+
+    /* Pose 3 (SCENE 5): Enlarged Bunny in Center + Left/Right Hand Push into Box! */
+    #strawberryBunnyActor.rummaging-center {
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.18);
+    }
+    #strawberryBunnyActor.rummaging-center #bunny-head-group {
+      transform: translateY(6px);
+    }
+    /* When Left Hand Pushes Down into the Box */
+    #strawberryBunnyActor.push-left #bunny-arm-left {
+      animation: none;
+      transform: rotate(-68deg) translate(-12px, 24px) scaleY(1.22);
+    }
+    #strawberryBunnyActor.push-left #bunny-arm-right {
+      animation: none;
+      transform: rotate(24deg) translate(-6px, -6px);
+    }
+    #strawberryBunnyActor.push-left #bunny-head-group {
+      transform: translateY(6px) rotate(-5deg);
+    }
+
+    /* When Right Hand Pushes Down into the Box */
+    #strawberryBunnyActor.push-right #bunny-arm-right {
+      animation: none;
+      transform: rotate(68deg) translate(12px, 24px) scaleY(1.22);
+    }
+    #strawberryBunnyActor.push-right #bunny-arm-left {
+      animation: none;
+      transform: rotate(-24deg) translate(6px, -6px);
+    }
+    #strawberryBunnyActor.push-right #bunny-head-group {
+      transform: translateY(6px) rotate(5deg);
+    }
+
+    /* Step 4A: Pulling Heart Out of the Box High */
+    #strawberryBunnyActor.pulling-heart-out {
+      top: 48%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+    #strawberryBunnyActor.pulling-heart-out #bunny-arm-left {
+      animation: none;
+      transform: rotate(95deg) translate(-6px, -4px);
+    }
+    #strawberryBunnyActor.pulling-heart-out #bunny-arm-right {
+      animation: none;
+      transform: rotate(-95deg) translate(6px, -4px);
+    }
+    #strawberryBunnyActor.pulling-heart-out #bunny-held-gift {
+      opacity: 1;
+      transform: translateY(18px) scale(0.95);
+    }
+
+    /* Step 4B: Lowering Heart Down to Chest & Wrapping Curved Forearms Around Front + Swaying! */
+    #strawberryBunnyActor.hugging-lowered-heart {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.24);
+      animation: bunnyGentleSway 2.4s ease-in-out infinite alternate;
+    }
+    /* Move the heart down onto the bunny's chest/belly */
+    #strawberryBunnyActor.hugging-lowered-heart #bunny-held-gift {
+      opacity: 1;
+      transform: translateY(132px) scale(1.04);
+    }
+    /* Hide regular arms, show under-heart shoulder roots + over-heart curved forearms */
+    #strawberryBunnyActor.hugging-lowered-heart #bunny-arm-left,
+    #strawberryBunnyActor.hugging-lowered-heart #bunny-arm-right {
+      opacity: 0;
+      animation: none;
+    }
+    #strawberryBunnyActor.hugging-lowered-heart #bunny-hug-shoulders-back {
+      opacity: 1;
+    }
+    #strawberryBunnyActor.hugging-lowered-heart #bunny-curved-hug-arms {
+      opacity: 1;
+    }
+    #strawberryBunnyActor.hugging-lowered-heart #curved-arm-left {
+      transform: scaleX(1) rotate(0deg);
+    }
+    #strawberryBunnyActor.hugging-lowered-heart #curved-arm-right {
+      transform: scaleX(1) rotate(0deg);
+    }
+
+    @keyframes bunnyGentleSway {
+      0% { transform: translate(-50%, -50%) scale(1.24) rotate(-4.5deg); }
+      100% { transform: translate(-50%, -50%) scale(1.24) rotate(4.5deg); }
+    }
+
+    /* ==========================================================================
+       3. 3D GIFT BOX IN THE GARDEN
+       Stays visible during Note Paper scene, then moves to center for Rummaging!
+       ========================================================================== */
+    #giftBoxActor {
+      position: absolute;
+      top: 60%;
+      left: 62%;
+      width: min(155px, 39vw);
+      height: min(145px, 37vw);
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition:
+        transform 0.55s cubic-bezier(0.34, 1.45, 0.64, 1),
+        opacity 0.55s ease,
+        left 0.8s cubic-bezier(0.28, 1.2, 0.55, 1),
+        top 0.8s cubic-bezier(0.28, 1.2, 0.55, 1);
+      z-index: 13;
+    }
+
+    #giftBoxActor.visible {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    #giftBoxActor.react-touch {
+      animation: boxSquash 0.55s ease;
+    }
+
+    /* Gift Box stays visibly parked on the lower-left side during the Note Paper scene */
+    #giftBoxActor.lower-aside {
+      top: 77%;
+      left: clamp(16%, 20vw, 24%);
+      transform: translate(-50%, -50%) scale(0.78);
+      opacity: 1;
+      z-index: 12;
+    }
+
+    /* Gift Box Positioned Right in the Middle of the Enlarged Bunny in Scene 5 */
+    #giftBoxActor.center-in-front-of-bunny {
+      top: 64%;
+      left: 50%;
+      opacity: 1;
+      z-index: 15;
+      transform: translate(-50%, -50%) scale(1.06);
+      transition:
+        transform 0.36s cubic-bezier(0.34, 1.45, 0.64, 1),
+        left 0.75s cubic-bezier(0.28, 1.2, 0.55, 1),
+        top 0.75s cubic-bezier(0.28, 1.2, 0.55, 1);
+    }
+
+    /* Left Paw Push -> Box Tilts Slightly to the Left */
+    #giftBoxActor.center-in-front-of-bunny.tilt-left {
+      transform: translate(-54%, -47%) scale(1.08, 0.94) rotate(-11deg);
+    }
+
+    /* Right Paw Push -> Box Tilts Slightly to the Right */
+    #giftBoxActor.center-in-front-of-bunny.tilt-right {
+      transform: translate(-46%, -47%) scale(1.08, 0.94) rotate(11deg);
+    }
+
+    @keyframes boxSquash {
+      0%, 100% { transform: translate(-50%, -50%) scale(1, 1); }
+      40% { transform: translate(-50%, -44%) scale(1.12, 0.86); }
+      75% { transform: translate(-50%, -55%) scale(0.94, 1.07); }
+    }
+
+    #giftLidGroup {
+      transform-origin: 25px 52px;
+      transition: transform 0.85s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+
+    #giftRibbonBow {
+      transform-origin: 100px 45px;
+      transition: transform 0.7s ease, opacity 0.6s ease;
+    }
+
+    #giftBoxActor.open #giftLidGroup {
+      transform: translate(-18px, -34px) rotate(-42deg);
+    }
+
+    #giftBoxActor.open #giftRibbonBow {
+      transform: translateY(-28px) scale(1.15);
+      opacity: 0;
+    }
+
+    /* ==========================================================================
+       4. TEMP WHITE PHOTO FRAME + 3D BUTTERFLY CARRIER
+       ========================================================================== */
+    #photoMemoryActor {
+      position: absolute;
+      top: 60%;
+      left: 62%;
+      width: clamp(86px, 20vw, 112px);
+      padding: 7px 7px 18px 7px;
+      background: #ffffff;
+      border-radius: 14px;
+      border: 2px solid #ffd4e3;
+      box-shadow: 0 14px 30px rgba(165, 50, 90, 0.25), 0 2px 6px rgba(255,255,255,0.9);
+      transform: translate(-50%, -50%) scale(0.15) rotate(-12deg);
+      opacity: 0;
+      transition:
+        top 1.25s cubic-bezier(0.28, 1.25, 0.55, 1),
+        left 1.25s cubic-bezier(0.28, 1.25, 0.55, 1),
+        transform 1.25s cubic-bezier(0.28, 1.25, 0.55, 1),
+        opacity 0.5s ease;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    #photoMemoryActor .photo-inner-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid #ffe8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    #memoryPhotoImg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #ffffff;
+    }
+
+    .photo-caption-heart {
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: #ff4d82;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    #photoMemoryActor.state-from-box {
+      opacity: 1;
+      top: 52%;
+      left: 60%;
+      transform: translate(-50%, -50%) scale(0.72) rotate(-6deg);
+    }
+
+    #photoMemoryActor.state-on-heart {
+      opacity: 1;
+      top: 31%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95) rotate(0deg);
+      box-shadow: 0 0 26px rgba(255, 105, 155, 0.65), 0 12px 28px rgba(165, 50, 90, 0.28);
+    }
+
+    #photoMemoryActor.state-docked-right {
+      opacity: 1;
+      top: 46%;
+      left: calc(100vw - clamp(85px, 14vw, 135px));
+      transform: translate(-50%, -50%) scale(1.28) rotate(5deg);
+      z-index: 22;
+      animation: dockedPhotoFloat 3.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes dockedPhotoFloat {
+      0% { transform: translate(-50%, -50%) scale(1.28) rotate(4deg) translateY(0px); }
+      100% { transform: translate(-50%, -50%) scale(1.28) rotate(6.5deg) translateY(-8px); }
+    }
+
+    @media (max-width: 640px) {
+      #photoMemoryActor.state-docked-right {
+        top: 22%;
+        left: calc(100vw - 64px);
+        transform: translate(-50%, -50%) scale(1.06) rotate(5deg);
+      }
+      @keyframes dockedPhotoFloat {
+        0% { transform: translate(-50%, -50%) scale(1.06) rotate(4deg) translateY(0px); }
+        100% { transform: translate(-50%, -50%) scale(1.06) rotate(6.5deg) translateY(-6px); }
+      }
+      #giftBoxActor.lower-aside {
+        top: 82%;
+        left: 18%;
+        transform: translate(-50%, -50%) scale(0.65);
+      }
+    }
+
+    /* 3D Animated Butterfly Carrier */
+    #butterflyActor {
+      position: absolute;
+      top: 18%;
+      left: -12%;
+      width: 68px;
+      height: 68px;
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0;
+      transition:
+        top 1.2s cubic-bezier(0.35, 0.85, 0.4, 1),
+        left 1.2s cubic-bezier(0.35, 0.85, 0.4, 1),
+        transform 1.2s ease,
+        opacity 0.4s ease;
+      z-index: 24;
+      pointer-events: none;
+    }
+
+    .bf-wing-left, .bf-wing-right {
+      transform-origin: 50px 50px;
+      animation: butterflyFlap 0.16s ease-in-out infinite alternate;
+    }
+
+    @keyframes butterflyFlap {
+      0% { transform: scaleX(1) rotate(4deg); }
+      100% { transform: scaleX(0.38) rotate(-6deg); }
+    }
+
+    /* ==========================================================================
+       5. NOTE PAPER FRAME IN THE GARDEN (#notePaperActor)
+       ========================================================================== */
+    #notePaperActor {
+      position: absolute;
+      top: 61%;
+      left: 50%;
+      width: min(550px, 90vw);
+      transform: translate(-50%, -50%) scale(0.25) rotate(-6deg);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.9s cubic-bezier(0.28, 1.35, 0.55, 1), opacity 0.7s ease;
+      z-index: 18;
+    }
+
+    #notePaperActor.open {
+      transform: translate(-50%, -50%) scale(1) rotate(-0.8deg);
+      opacity: 1;
+    }
+
+    .note-sheet {
+      position: relative;
+      background:
+        repeating-linear-gradient(
+          transparent,
+          transparent 29px,
+          rgba(255, 182, 205, 0.28) 29px,
+          rgba(255, 182, 205, 0.28) 30px
+        ),
+        linear-gradient(175deg, #fffdf7 0%, #fff4f7 100%);
+      border: 2px solid #f7c6d8;
+      border-radius: 18px 18px 24px 18px;
+      padding: clamp(22px, 4vw, 30px) clamp(16px, 4vw, 30px) clamp(18px, 3.5vw, 26px);
+      box-shadow:
+        0 22px 48px rgba(160, 55, 90, 0.22),
+        0 5px 0 #f2bfd0,
+        inset 0 2px 10px #ffffff;
+      text-align: center;
+    }
+
+    .note-washi-tape {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 118px;
+      height: 26px;
+      background: rgba(255, 150, 185, 0.72);
+      border-left: 3px dotted rgba(255,255,255,0.8);
+      border-right: 3px dotted rgba(255,255,255,0.8);
+      box-shadow: 0 3px 8px rgba(175, 65, 100, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    .note-line {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+      margin-bottom: 8px;
+      line-height: 1.5;
+      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      font-weight: 600;
+      color: #702943;
+    }
+
+    .note-line.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .note-line.note-highlight {
+      font-size: clamp(1rem, 2.9vw, 1.22rem);
+      font-weight: 700;
+      color: #b81950;
+      background: rgba(255, 224, 235, 0.65);
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      box-shadow: inset 0 0 0 1.5px rgba(255, 165, 195, 0.6);
+    }
+
+    /* ==========================================================================
+       DIALOGUE HUD & SINGLE OPENING BUTTON
+       ========================================================================== */
+    #dialogueLayer {
+      position: absolute;
+      top: max(16px, env(safe-area-inset-top, 16px));
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(620px, 92vw);
+      text-align: center;
+      z-index: 25;
+      pointer-events: none;
+    }
+
+    .dialogue-bubble {
+      display: inline-block;
+      background: rgba(255, 252, 254, 0.92);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 198, 218, 0.92);
+      border-radius: 26px;
+      padding: 13px 22px;
+      box-shadow: 0 14px 32px rgba(175, 70, 105, 0.16), inset 0 2px 4px #ffffff;
+      font-size: clamp(1.02rem, 3.1vw, 1.28rem);
+      font-weight: 700;
+      line-height: 1.48;
+      color: var(--text-dark);
+      opacity: 0;
+      transform: translateY(-12px) scale(0.95);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.5, 0.64, 1);
+    }
+
+    .dialogue-bubble.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    #ctaContainer {
+      position: absolute;
+      bottom: max(36px, env(safe-area-inset-bottom, 36px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    #openLetterBtn {
+      pointer-events: auto;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: clamp(1.08rem, 3.5vw, 1.28rem);
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(180deg, #ff6996 0%, #ff3e75 100%);
+      padding: 16px 36px;
+      border-radius: 999px;
+      box-shadow:
+        0 10px 26px rgba(255, 62, 117, 0.42),
+        0 4px 0 #c91f53,
+        inset 0 2px 4px rgba(255, 255, 255, 0.65);
+      opacity: 0;
+      transform: translateY(16px) scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease, box-shadow 0.3s ease;
+    }
+
+    #openLetterBtn.ready {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      animation: btnPulse 2.2s ease-in-out infinite;
+    }
+
+    #openLetterBtn:active {
+      transform: scale(0.92);
+    }
+
+    @keyframes btnPulse {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-4px) scale(1.04); }
+    }
+
+    #finalOverlay {
+      position: absolute;
+      bottom: max(20px, env(safe-area-inset-bottom, 20px));
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92vw;
+      text-align: center;
+      z-index: 26;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    #finalOverlay.show {
+      opacity: 1;
+    }
+
+    .final-love-line {
+      font-size: clamp(1.22rem, 3.8vw, 1.62rem);
+      font-weight: 700;
+      color: #b81d52;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95);
+      margin-bottom: 4px;
+    }
+
+    .final-signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.5rem, 4.6vw, 2.15rem);
+      font-weight: 700;
+      color: #7d2449;
+      text-shadow: 0 2px 8px rgba(255, 255, 255, 0.9);
+    }
+
+    #particleCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.25s !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main id="viewportWorld" aria-label="Câu chuyện quà tặng 20 tháng 10 Thỏ Dâu Tây">
+    <div class="sky-glow"></div>
+    <div id="hugWarmAura"></div>
+
+    <!-- Drifting Clouds -->
+    <div class="cloud-layer">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+    </div>
+
+    <!-- Simulated 3D Camera World -->
+    <div id="worldCamera">
+      <div class="hills-distant"></div>
+      <div class="meadow-midground"></div>
+      <div class="garden-path"></div>
+
+      <!-- Back Botanical Flower Layer -->
+      <div id="gardenFlowersBack"></div>
+
+      <!-- Center Stage Actors -->
+      <div id="stageCenter">
+        <!-- 1. 3D Envelope -->
+        <div id="envelopeActor" class="idle-Invite">
+          <div class="env-shadow"></div>
+          <div class="env-back"></div>
+          <div class="env-inner-glow"></div>
+          <svg class="env-pocket" viewBox="0 0 310 205" preserveAspectRatio="none">
+            <path d="M0,205 L155,110 L310,205 Z" fill="#fae0d4" />
+            <path d="M0,0 L155,118 L0,205 Z" fill="#fff0e8" />
+            <path d="M310,0 L155,118 L310,205 Z" fill="#fce8de" />
+          </svg>
+          <svg class="env-flap" viewBox="0 0 310 120" preserveAspectRatio="none">
+            <path d="M0,0 L310,0 L155,114 Z" fill="#ffe8dc" stroke="#f5cbb8" stroke-width="2" />
+          </svg>
+        </div>
+
+        <!-- 2. Gift Box Actor (Remains visible during Note Paper scene, then slides to Center for Rummaging!) -->
+        <div id="giftBoxActor" aria-hidden="true">
+          <svg viewBox="0 0 200 190" width="100%" height="100%" overflow="visible">
+            <defs>
+              <linearGradient id="boxBodyGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ff9ebb" />
+                <stop offset="100%" stop-color="#ff6996" />
+              </linearGradient>
+              <linearGradient id="boxLidGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffb5cc" />
+                <stop offset="100%" stop-color="#ff7da5" />
+              </linearGradient>
+              <linearGradient id="creamRibbon" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fffdf9" />
+                <stop offset="100%" stop-color="#ffe7cc" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="100" cy="172" rx="68" ry="14" fill="rgba(155,55,85,0.22)" />
+            <rect x="35" y="68" width="130" height="100" rx="16" fill="url(#boxBodyGrad)" stroke="#f05282" stroke-width="2" />
+            <rect x="88" y="68" width="24" height="100" fill="url(#creamRibbon)" />
+            <ellipse cx="100" cy="70" rx="52" ry="14" fill="#fff4b8" opacity="0.88" />
+            <g id="giftLidGroup">
+              <rect x="26" y="44" width="148" height="32" rx="10" fill="url(#boxLidGrad)" stroke="#f05282" stroke-width="2" />
+              <rect x="86" y="44" width="28" height="32" fill="url(#creamRibbon)" />
+              <g id="giftRibbonBow">
+                <path d="M100,44 C75,14 48,26 68,44 Z" fill="url(#creamRibbon)" stroke="#f2d2b0" stroke-width="2" />
+                <path d="M100,44 C125,14 152,26 132,44 Z" fill="url(#creamRibbon)" stroke="#f2d2b0" stroke-width="2" />
+                <circle cx="100" cy="42" r="8" fill="#fffdf9" stroke="#f2d2b0" stroke-width="2" />
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 3. STRAWBERRY-BUNNY MODEL:
+             - Under-heart Shoulder Roots (#bunny-hug-shoulders-back) sit UNDER the Heart
+             - Over-heart Curved Forearms (#bunny-curved-hug-arms) wrap OVER the front of the Heart -->
+        <div id="strawberryBunnyActor">
+          <svg id="strawberryBunnySvg" viewBox="0 0 360 340">
+            <defs>
+              <!-- Plush Strawberry Red-Pink Outer Gradient -->
+              <radialGradient id="strawPlushGrad" cx="38%" cy="30%" r="68%">
+                <stop offset="0%" stop-color="#ff708e" />
+                <stop offset="45%" stop-color="#ff3b63" />
+                <stop offset="85%" stop-color="#e01944" />
+                <stop offset="100%" stop-color="#bf1137" />
+              </radialGradient>
+
+              <!-- Plush Inner Peach-Pink Lining Gradient -->
+              <linearGradient id="wingLiningLeft" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffe0e7" />
+                <stop offset="55%" stop-color="#ffb5c6" />
+                <stop offset="100%" stop-color="#f593aa" />
+              </linearGradient>
+              <linearGradient id="wingLiningRight" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ffe0e7" />
+                <stop offset="55%" stop-color="#ffb5c6" />
+                <stop offset="100%" stop-color="#f593aa" />
+              </linearGradient>
+
+              <!-- White Plush Bunny Fur Gradient -->
+              <radialGradient id="bunnyPlushGrad" cx="48%" cy="34%" r="64%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="68%" stop-color="#fff7f9" />
+                <stop offset="100%" stop-color="#edd4db" />
+              </radialGradient>
+
+              <!-- Distinct Plush Arm Gradient -->
+              <radialGradient id="bunnyArmGrad" cx="45%" cy="35%" r="68%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="65%" stop-color="#fff2f5" />
+                <stop offset="100%" stop-color="#e4c5ce" />
+              </radialGradient>
+
+              <!-- User-Space Arm Gradients so Under-Heart Shoulder & Over-Heart Forearm blend 100% seamlessly -->
+              <linearGradient id="hugArmGradLeft" gradientUnits="userSpaceOnUse" x1="100" y1="195" x2="178" y2="242">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="65%" stop-color="#fff2f5" />
+                <stop offset="100%" stop-color="#ead0d7" />
+              </linearGradient>
+              <linearGradient id="hugArmGradRight" gradientUnits="userSpaceOnUse" x1="260" y1="195" x2="182" y2="242">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="65%" stop-color="#fff2f5" />
+                <stop offset="100%" stop-color="#ead0d7" />
+              </linearGradient>
+
+              <!-- Upright Green Strawberry Leaf Gradient -->
+              <linearGradient id="leafPlushGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#52b844" />
+                <stop offset="55%" stop-color="#2e8524" />
+                <stop offset="100%" stop-color="#1c5c16" />
+              </linearGradient>
+
+              <!-- Glowing Heart Gift Gradient -->
+              <radialGradient id="heartGiftGrad" cx="35%" cy="30%" r="68%">
+                <stop offset="0%" stop-color="#fff0f5" />
+                <stop offset="35%" stop-color="#ff7aa8" />
+                <stop offset="80%" stop-color="#ff2e74" />
+                <stop offset="100%" stop-color="#c9104f" />
+              </radialGradient>
+
+              <!-- Yellow Strawberry Seed inside Recessed Plush Dimple -->
+              <g id="plush-seed">
+                <ellipse cx="0" cy="1" rx="5.2" ry="7.8" fill="rgba(155, 10, 42, 0.28)" />
+                <path d="M0,-5.5 C3.2,-1.5 3.6,3.5 0,5.8 C-3.6,3.5 -3.2,-1.5 0,-5.5 Z" fill="#ffda3d" stroke="#f59e0b" stroke-width="0.7" />
+                <ellipse cx="-1" cy="-1" rx="1" ry="2.2" fill="#fff9bf" opacity="0.85" />
+              </g>
+
+              <!-- BOTTOM-UP REVEAL CLIP PATH -->
+              <clipPath id="bunnyBottomUpClip">
+                <polygon id="unzipRevealPolygon" points="178,74 182,74 182,74 178,74" />
+              </clipPath>
+            </defs>
+
+            <!-- Ground Shadow under Bunny -->
+            <ellipse cx="180" cy="306" rx="84" ry="16" fill="rgba(150, 50, 80, 0.2)" />
+
+            <!-- ============================================================
+                 UPRIGHT GREEN STRAWBERRY LEAVES AT TOP CENTER
+                 ============================================================ -->
+            <g id="sb-leaves-group">
+              <path d="M182,76 C176,40 188,10 204,8 C220,12 226,44 202,76 Z" fill="url(#leafPlushGrad)" stroke="#1b5915" stroke-width="1.5" />
+              <path d="M196,18 Q200,46 192,73" stroke="#7ae068" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6" />
+              <path d="M178,78 C148,52 152,12 172,6 C194,10 198,48 184,78 Z" fill="url(#leafPlushGrad)" stroke="#1b5915" stroke-width="1.5" />
+              <path d="M172,16 Q174,46 178,74" stroke="#8cf07a" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7" />
+            </g>
+
+            <!-- ============================================================
+                 LAYER 1: WHITE PLUSH BUNNY BODY, HEAD, FEET & UNDER-HEART SHOULDER ROOTS
+                 (Everything in Layer 1 sits strictly UNDERNEATH the Heart!)
+                 ============================================================ -->
+            <g id="sb-bunny-core" clip-path="url(#bunnyBottomUpClip)">
+              <!-- Plump White Plush Torso -->
+              <path d="M128,184 C118,220 120,268 140,284 C162,292 198,292 220,284 C240,268 242,220 232,184 C216,170 144,170 128,184 Z" fill="url(#bunnyPlushGrad)" stroke="#dfc2c9" stroke-width="2" />
+              <ellipse cx="180" cy="234" rx="35" ry="38" fill="#ffe6ee" opacity="0.7" />
+
+              <!-- UNDER-HEART SHOULDER ATTACHMENT ROOTS FOR FINAL HUG:
+                   Attaches the arms to the torso UNDERNEATH the lowered heart so the shoulder joint
+                   never overlaps or appears on top of the heart! -->
+              <g id="bunny-hug-shoulders-back">
+                <!-- Left Shoulder Root (Tucked underneath the left side of the heart) -->
+                <path d="M142,192 C122,194 102,204 102,222 C102,230 116,232 136,224 Z" fill="url(#hugArmGradLeft)" />
+                <path d="M129,194 C114,198 102,207 102,222" stroke="#d4b2bc" stroke-width="2.2" fill="none" stroke-linecap="round" />
+                <!-- Right Shoulder Root (Tucked underneath the right side of the heart) -->
+                <path d="M218,192 C238,194 258,204 258,222 C258,230 244,232 224,224 Z" fill="url(#hugArmGradRight)" />
+                <path d="M231,194 C246,198 258,207 258,222" stroke="#d4b2bc" stroke-width="2.2" fill="none" stroke-linecap="round" />
+              </g>
+
+              <!-- Bunny Head & Chubby Cheeks -->
+              <g id="bunny-head-group">
+                <path d="M180,76 C140,76 110,120 108,158 C106,186 134,197 180,197 C226,197 254,186 252,158 C250,120 220,76 180,76 Z" fill="url(#bunnyPlushGrad)" stroke="#dfc2c9" stroke-width="2" />
+                <path d="M134,191 Q180,201 226,191" stroke="#d9b8c0" stroke-width="2" fill="none" stroke-linecap="round" />
+
+                <!-- Soft Rosy Cheeks -->
+                <ellipse cx="140" cy="164" rx="13" ry="8" fill="#ff9eb6" opacity="0.55" />
+                <ellipse cx="220" cy="164" rx="13" ry="8" fill="#ff9eb6" opacity="0.55" />
+
+                <!-- CLEAR, EXPRESSIVE DARK BURGUNDY EYES WITH CATCHLIGHTS -->
+                <g id="bunny-eyes">
+                  <circle cx="154" cy="151" r="8.8" fill="#4f0e17" stroke="#7d1e2b" stroke-width="1.5" />
+                  <circle cx="156.6" cy="148.2" r="2.9" fill="#ffffff" />
+                  <circle cx="151.5" cy="154" r="1.3" fill="#ffffff" opacity="0.8" />
+
+                  <circle cx="206" cy="151" r="8.8" fill="#4f0e17" stroke="#7d1e2b" stroke-width="1.5" />
+                  <circle cx="203.4" cy="148.2" r="2.9" fill="#ffffff" />
+                  <circle cx="208.5" cy="154" r="1.3" fill="#ffffff" opacity="0.8" />
+                </g>
+
+                <!-- CLEAR PINK HEART NOSE & STITCHED MOUTH -->
+                <g id="bunny-nose-mouth">
+                  <path d="M180,161 C175.5,155.5 168.5,158 170.5,164 C172.2,168.8 180,172.5 180,172.5 C180,172.5 187.8,168.8 189.5,164 C191.5,158 184.5,155.5 180,161 Z" fill="#ff859d" stroke="#b83b54" stroke-width="1.6" />
+                  <ellipse cx="176" cy="161" rx="2.2" ry="1.2" fill="#ffd6df" opacity="0.85" />
+                  <path d="M180,172.5 L180,178 M180,177.5 C176.5,182 172,181.5 169.5,178.5 M180,177.5 C183.5,182 188,181.5 190.5,178.5" stroke="#2b0b10" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+              </g>
+
+              <!-- Chubby Forward-Facing Feet with Pink Paw Pads -->
+              <g id="bunny-foot-left">
+                <ellipse cx="146" cy="284" rx="24" ry="20" transform="rotate(-8 146 284)" fill="url(#bunnyPlushGrad)" stroke="#d9b8c0" stroke-width="2" />
+                <ellipse cx="146" cy="291" rx="7" ry="5.2" fill="#f07d70" />
+                <circle cx="136.5" cy="282" r="3.4" fill="#f07d70" />
+                <circle cx="146" cy="279" r="3.6" fill="#f07d70" />
+                <circle cx="155.5" cy="282" r="3.4" fill="#f07d70" />
+              </g>
+              <g id="bunny-foot-right">
+                <ellipse cx="214" cy="284" rx="24" ry="20" transform="rotate(8 214 284)" fill="url(#bunnyPlushGrad)" stroke="#d9b8c0" stroke-width="2" />
+                <ellipse cx="214" cy="291" rx="7" ry="5.2" fill="#f07d70" />
+                <circle cx="204.5" cy="282" r="3.4" fill="#f07d70" />
+                <circle cx="214" cy="279" r="3.6" fill="#f07d70" />
+                <circle cx="223.5" cy="282" r="3.4" fill="#f07d70" />
+              </g>
+            </g>
+
+            <!-- ============================================================
+                 LAYER 2: 2 SEPARATE HOODED STRAWBERRY WINGS / EARS (#sb-wing-left & #sb-wing-right)
+                 ============================================================ -->
+            <g id="sb-wing-left">
+              <path d="M180,74 C154,108 134,148 112,188 C94,218 58,252 24,268 C42,240 88,162 180,74 Z" fill="rgba(145, 45, 75, 0.16)" transform="translate(4, 3)" />
+              <path d="M180,74 C156,112 136,158 110,198 C82,240 50,276 20,268 C48,225 96,138 180,74 Z" fill="url(#wingLiningLeft)" stroke="#f298ae" stroke-width="1.8" />
+              <path d="M180,74 C112,82 44,168 18,266 C48,258 92,220 126,172 C152,135 168,102 180,74 Z" fill="url(#strawPlushGrad)" stroke="#d41742" stroke-width="1.8" />
+              <path d="M180,74 C168,102 152,135 126,172 C92,220 48,258 19,266" stroke="#ffdce5" stroke-width="4.8" stroke-linecap="round" fill="none" />
+              <use href="#plush-seed" transform="translate(136, 106) rotate(20)" />
+              <use href="#plush-seed" transform="translate(96, 142) rotate(26)" />
+              <use href="#plush-seed" transform="translate(116, 164) rotate(18)" />
+              <use href="#plush-seed" transform="translate(70, 194) rotate(28)" />
+              <use href="#plush-seed" transform="translate(50, 234) rotate(30)" />
+            </g>
+
+            <g id="sb-wing-right">
+              <path d="M180,74 C206,108 226,148 248,188 C266,218 302,252 336,268 C318,240 272,162 180,74 Z" fill="rgba(145, 45, 75, 0.16)" transform="translate(-4, 3)" />
+              <path d="M180,74 C204,112 224,158 250,198 C278,240 310,276 340,268 C312,225 264,138 180,74 Z" fill="url(#wingLiningRight)" stroke="#f298ae" stroke-width="1.8" />
+              <path d="M180,74 C248,82 316,168 342,266 C312,258 268,220 234,172 C208,135 192,102 180,74 Z" fill="url(#strawPlushGrad)" stroke="#d41742" stroke-width="1.8" />
+              <path d="M180,74 C192,102 208,135 234,172 C268,220 312,258 341,266" stroke="#ffdce5" stroke-width="4.8" stroke-linecap="round" fill="none" />
+              <use href="#plush-seed" transform="translate(224, 106) rotate(-20)" />
+              <use href="#plush-seed" transform="translate(264, 142) rotate(-26)" />
+              <use href="#plush-seed" transform="translate(244, 164) rotate(-18)" />
+              <use href="#plush-seed" transform="translate(290, 194) rotate(-28)" />
+              <use href="#plush-seed" transform="translate(310, 234) rotate(-30)" />
+            </g>
+
+            <!-- ============================================================
+                 LAYER 3: HELD GLOWING HEART GIFT
+                 (Covers the shoulder attachment roots in Layer 1, while the curved
+                 forearms in Layer 4 wrap over the front of this heart!)
+                 ============================================================ -->
+            <g id="bunny-held-gift">
+              <circle cx="180" cy="96" r="56" fill="rgba(255, 230, 240, 0.58)" filter="blur(8px)" />
+              <circle cx="142" cy="108" r="9" fill="#fff6a8" stroke="#ffffff" stroke-width="3" />
+              <circle cx="218" cy="108" r="9" fill="#ffd1e3" stroke="#ffffff" stroke-width="3" />
+              <path d="M180,136 C180,136 130,106 130,76 C130,56 148,46 165,52 C173,55 180,65 180,65 C180,65 187,55 195,52 C212,46 230,56 230,76 C230,106 180,136 180,136 Z" fill="url(#heartGiftGrad)" stroke="#ffffff" stroke-width="2.5" filter="drop-shadow(0 8px 18px rgba(255,45,115,0.55))" />
+              <ellipse cx="154" cy="70" rx="9" ry="5" transform="rotate(-28 154 70)" fill="rgba(255,255,255,0.75)" />
+            </g>
+
+            <!-- ============================================================
+                 LAYER 4: REGULAR ARMS + OVER-HEART CURVED FOREARMS
+                 Note: In #bunny-curved-hug-arms, ONLY the curved forearm from the
+                 outer edge of the heart inward is drawn here so the shoulder attachment
+                 stays 100% underneath the heart!
+                 ============================================================ -->
+            <g id="bunny-arms-front-layer" clip-path="url(#bunnyBottomUpClip)">
+              <!-- Regular Plush Arms (Hidden during final heart hug) -->
+              <g id="bunny-arm-left">
+                <path d="M134,191 C106,196 84,218 92,235 C100,248 124,238 142,216 Z" fill="rgba(160, 75, 95, 0.18)" transform="translate(0, 4)" />
+                <path d="M134,191 C106,196 84,218 92,235 C100,248 124,238 142,216 Z" fill="url(#bunnyArmGrad)" stroke="#d4b2bc" stroke-width="2.2" />
+                <ellipse cx="105" cy="228" rx="6" ry="4.2" transform="rotate(-25 105 228)" fill="#f598a8" opacity="0.8" />
+              </g>
+
+              <g id="bunny-arm-right">
+                <path d="M226,191 C254,196 276,218 268,235 C260,248 236,238 218,216 Z" fill="rgba(160, 75, 95, 0.18)" transform="translate(0, 4)" />
+                <path d="M226,191 C254,196 276,218 268,235 C260,248 236,238 218,216 Z" fill="url(#bunnyArmGrad)" stroke="#d4b2bc" stroke-width="2.2" />
+                <ellipse cx="255" cy="228" rx="6" ry="4.2" transform="rotate(25 255 228)" fill="#f598a8" opacity="0.8" />
+              </g>
+
+              <!-- Over-Heart Curved Forearms & Paws (Wraps from outside the heart across the front, slightly curved in the middle) -->
+              <g id="bunny-curved-hug-arms">
+                <!-- Left Curved Forearm wrapping over front of Heart -->
+                <g id="curved-arm-left">
+                  <!-- Soft drop shadow on the front of the heart -->
+                  <path d="M126,216 C142,222 154,221 168,221 C180,221 180,241 166,242 C136,245 102,238 102,220 Z" fill="rgba(140, 25, 60, 0.22)" transform="translate(0, 4)" />
+                  <!-- Seamless Forearm Fill (Starts from outer elbow x=102 outside the heart, never touches upper shoulder!) -->
+                  <path d="M102,218 C102,238 136,245 166,242 C180,241 180,221 168,221 C152,221 138,222 124,215 Z" fill="url(#hugArmGradLeft)" />
+                  <!-- Outer & Front Contour Stroke (Open at outer elbow top so it joins the under-heart shoulder with zero seam) -->
+                  <path d="M102,218 C102,238 136,245 166,242 C180,241 180,221 168,221 C152,221 140,222 127,216" stroke="#d4b2bc" stroke-width="2.2" fill="none" stroke-linecap="round" />
+                  <ellipse cx="165" cy="231.5" rx="6.5" ry="4.5" fill="#f598a8" opacity="0.85" />
+                </g>
+
+                <!-- Right Curved Forearm wrapping over front of Heart -->
+                <g id="curved-arm-right">
+                  <!-- Soft drop shadow on the front of the heart -->
+                  <path d="M234,216 C218,222 206,221 192,221 C180,221 180,241 194,242 C224,245 258,238 258,220 Z" fill="rgba(140, 25, 60, 0.22)" transform="translate(0, 4)" />
+                  <!-- Seamless Forearm Fill -->
+                  <path d="M258,218 C258,238 224,245 194,242 C180,241 180,221 192,221 C208,221 222,222 236,215 Z" fill="url(#hugArmGradRight)" />
+                  <!-- Outer & Front Contour Stroke -->
+                  <path d="M258,218 C258,238 224,245 194,242 C180,241 180,221 192,221 C208,221 220,222 233,216" stroke="#d4b2bc" stroke-width="2.2" fill="none" stroke-linecap="round" />
+                  <ellipse cx="195" cy="231.5" rx="6.5" ry="4.5" fill="#f598a8" opacity="0.85" />
+                </g>
+              </g>
+            </g>
+
+            <!-- ============================================================
+                 LAYER 5: CLOSED STRAWBERRY SHELL HALVES + FULL-LENGTH ZIPPER
+                 ============================================================ -->
+            <g id="sb-closed-shell">
+              <g id="closed-half-left" style="transform-origin: 180px 74px;">
+                <path d="M180,72 C124,72 104,118 106,182 C108,248 132,286 180,286 L180,72 Z" fill="url(#strawPlushGrad)" stroke="#c7143e" stroke-width="1.8" />
+                <path d="M134,102 C118,140 118,205 134,250" stroke="rgba(255,255,255,0.32)" stroke-width="11" stroke-linecap="round" fill="none" />
+                <use href="#plush-seed" transform="translate(158, 106) rotate(8)" />
+                <use href="#plush-seed" transform="translate(130, 148) rotate(-6)" />
+                <use href="#plush-seed" transform="translate(152, 196) rotate(5)" />
+                <use href="#plush-seed" transform="translate(132, 234) rotate(-8)" />
+                <use href="#plush-seed" transform="translate(162, 258) rotate(6)" />
+                <line x1="179" y1="74" x2="179" y2="284" stroke="#ff9bb0" stroke-width="2" stroke-dasharray="4 3" />
+              </g>
+
+              <g id="closed-half-right" style="transform-origin: 180px 74px;">
+                <path d="M180,72 C236,72 256,118 254,182 C252,248 228,286 180,286 L180,72 Z" fill="url(#strawPlushGrad)" stroke="#c7143e" stroke-width="1.8" />
+                <use href="#plush-seed" transform="translate(202, 114) rotate(-8)" />
+                <use href="#plush-seed" transform="translate(226, 152) rotate(-12)" />
+                <use href="#plush-seed" transform="translate(204, 186) rotate(10)" />
+                <use href="#plush-seed" transform="translate(226, 222) rotate(10)" />
+                <use href="#plush-seed" transform="translate(198, 256) rotate(-6)" />
+                <line x1="181" y1="74" x2="181" y2="284" stroke="#ff9bb0" stroke-width="2" stroke-dasharray="4 3" />
+              </g>
+
+              <line id="zipper-white-slit" x1="180" y1="74" x2="180" y2="74" stroke="#fff7f9" stroke-width="4.5" stroke-linecap="round" />
+
+              <g id="sb-zipper-pull" transform="translate(180, 76)">
+                <circle id="zipper-spark" cx="0" cy="0" r="12" fill="rgba(255, 245, 190, 0.85)" filter="blur(3px)" opacity="0" />
+                <rect x="-5" y="-6" width="10" height="12" rx="3" fill="#fff8f0" stroke="#c98a98" stroke-width="1.5" />
+                <rect x="-4" y="4" width="8" height="15" rx="3.5" fill="#ffffff" stroke="#c98a98" stroke-width="1.5" />
+                <circle cx="0" cy="14" r="2" fill="#c98a98" />
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 4. TEMP WHITE PHOTO FRAME (Picked from Gift Box by Butterfly -> Placed on Heart -> Docked Right) -->
+        <div id="photoMemoryActor">
+          <div class="photo-inner-wrap">
+            <img
+              id="memoryPhotoImg"
+              src="photo.jpg"
+              alt="Kỷ niệm ngọt ngào"
+              onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22 viewBox=%220 0 400 400%22><rect width=%22400%22 height=%22400%22 fill=%22%23ffffff%22/><circle cx=%22200%22 cy=%22190%22 r=%2250%22 fill=%22%23fff2f6%22/><path d=%22M200 218 C200 218 168 196 168 176 C168 164 178 156 190 160 C196 162 200 168 200 168 C200 168 204 162 210 160 C222 156 232 164 232 176 C232 196 200 218 200 218 Z%22 fill=%22%23ffb8d0%22/></svg>';"
+            />
+          </div>
+          <span class="photo-caption-heart">♡ 20/10 ♡</span>
+        </div>
+
+        <!-- 5. 3D Butterfly Actor -->
+        <div id="butterflyActor" aria-hidden="true">
+          <svg viewBox="0 0 100 100" width="100%" height="100%" overflow="visible">
+            <defs>
+              <linearGradient id="bfWingGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#fff0f6" />
+                <stop offset="45%" stop-color="#ff85b3" />
+                <stop offset="100%" stop-color="#d63384" />
+              </linearGradient>
+            </defs>
+            <g class="bf-wing-left">
+              <path d="M48,48 C22,18 6,28 14,52 C18,64 34,64 48,54 Z" fill="url(#bfWingGrad)" stroke="#ffffff" stroke-width="1.5" />
+              <path d="M48,54 C26,60 18,78 32,84 C42,88 48,72 48,56 Z" fill="#ffc2d9" stroke="#ffffff" stroke-width="1.2" />
+            </g>
+            <g class="bf-wing-right">
+              <path d="M52,48 C78,18 94,28 86,52 C82,64 66,64 52,54 Z" fill="url(#bfWingGrad)" stroke="#ffffff" stroke-width="1.5" />
+              <path d="M52,54 C74,60 82,78 68,84 C58,88 52,72 52,56 Z" fill="#ffc2d9" stroke="#ffffff" stroke-width="1.2" />
+            </g>
+            <ellipse cx="50" cy="54" rx="3.2" ry="14" fill="#6b2643" />
+            <path d="M48,41 Q42,30 36,32 M52,41 Q58,30 64,32" stroke="#6b2643" stroke-width="1.5" fill="none" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <!-- 6. NOTE PAPER FRAME (#notePaperActor) - Holds all the wish texts! -->
+        <div id="notePaperActor">
+          <div class="note-sheet">
+            <div class="note-washi-tape">📝 Giấy Note ♡</div>
+            <p id="noteLine1" class="note-line"></p>
+            <p id="noteLine2" class="note-line"></p>
+            <p id="noteLine3" class="note-line"></p>
+            <p id="noteLine4" class="note-line note-highlight"></p>
+            <p id="noteLine5" class="note-line"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Front Botanical Flower Layer -->
+      <div id="gardenFlowersFront"></div>
+    </div>
+
+    <!-- Full-Viewport Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Top Dialogue Display -->
+    <div id="dialogueLayer" aria-live="polite">
+      <div id="dialogueBubble" class="dialogue-bubble"></div>
+    </div>
+
+    <!-- Single Required Start Button -->
+    <div id="ctaContainer">
+      <button id="openLetterBtn" type="button"></button>
+    </div>
+
+    <!-- Final Scene Indefinite Greeting & Signature -->
+    <div id="finalOverlay">
+      <div id="finalLoveText" class="final-love-line"></div>
+      <div id="finalSignatureText" class="final-signature"></div>
+    </div>
+  </main>
+
+  <script>
+    /* ==========================================================================
+       AUTHORITATIVE VIETNAMESE DIALOGUE & NOTE PAPER SCRIPT
+       ========================================================================== */
+    const SCRIPT = Object.freeze({
+      d1: "Psst… em ơiii! 🍓",
+      d2: "Anh có một món quà nhỏ dành riêng cho em nè…",
+      button: "Mở thư đi em 💌",
+      d3: "Tadaaa! Thỏ dâu tây đến rồi đây! 🍓🐰",
+      d4: "Đi theo tớ nhé, phía trước còn có một bất ngờ nữa đấy! ✨",
+      d_box_here: "Ơ kìa! Ở đây có một chiếc hộp quà bí mật nè! 🎁✨",
+      d_note_found: "Ủa, bên trong hộp quà có một mảnh giấy note nhỏ nè! 📝💌",
+      d5: "Chúc em 20/10 luôn vui vẻ, rạng rỡ như những bông hoa này. 🌷",
+      d6: "Mong mọi điều dịu dàng và ngọt ngào nhất hôm nay đều tìm đến em. 💗",
+      d7: "Hôm nay là ngày của em, nên hãy cười thật nhiều và để mình được yêu thương thật nhiều nhé! 🥰",
+      d8: "Chúc cô gái anh yêu luôn xinh đẹp, bình an, gặp thật nhiều điều tốt đẹp và mãi là em bé đáng yêu của anh nhé. Anh yêu em nhiều lắm! ❤️💗",
+      d9: "Cảm ơn em vì đã xuất hiện trong cuộc sống của anh, khiến những ngày bình thường cũng trở nên đặc biệt hơn. 💕",
+      d_one_more_thing: "Và còn 1 cái gì đó nữa này… 🎁✨",
+      d10: "Và món quà cuối cùng… là một cái ôm thật chặt từ anh dành cho em. 🐰💗",
+      d11: "Yêu em nhiều nhiều! 💗",
+      signature: "From anh, with love ♡"
+    });
+
+    /* ==========================================================================
+       DOM ELEMENTS
+       ========================================================================== */
+    const world = document.getElementById('viewportWorld');
+    const hugWarmAura = document.getElementById('hugWarmAura');
+    const camera = document.getElementById('worldCamera');
+    const envelope = document.getElementById('envelopeActor');
+    const bunny = document.getElementById('strawberryBunnyActor');
+    const giftBox = document.getElementById('giftBoxActor');
+    const photoMemory = document.getElementById('photoMemoryActor');
+    const butterfly = document.getElementById('butterflyActor');
+    const notePaper = document.getElementById('notePaperActor');
+    const dialogueBubble = document.getElementById('dialogueBubble');
+    const openBtn = document.getElementById('openLetterBtn');
+    const ctaContainer = document.getElementById('ctaContainer');
+
+    const noteLine1 = document.getElementById('noteLine1');
+    const noteLine2 = document.getElementById('noteLine2');
+    const noteLine3 = document.getElementById('noteLine3');
+    const noteLine4 = document.getElementById('noteLine4');
+    const noteLine5 = document.getElementById('noteLine5');
+
+    const finalOverlay = document.getElementById('finalOverlay');
+    const finalLoveText = document.getElementById('finalLoveText');
+    const finalSigText = document.getElementById('finalSignatureText');
+
+    // Strawberry Bunny Zipper & Bottom-Up Peel Elements
+    const unzipPolygon = document.getElementById('unzipRevealPolygon');
+    const zipperPull = document.getElementById('sb-zipper-pull');
+    const zipperSpark = document.getElementById('zipper-spark');
+    const zipperWhiteSlit = document.getElementById('zipper-white-slit');
+    const closedShell = document.getElementById('sb-closed-shell');
+    const closedHalfLeft = document.getElementById('closed-half-left');
+    const closedHalfRight = document.getElementById('closed-half-right');
+    const wingLeft = document.getElementById('sb-wing-left');
+    const wingRight = document.getElementById('sb-wing-right');
+
+    let storyStarted = false;
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    function showDialogue(text) {
+      dialogueBubble.classList.remove('visible');
+      return wait(240).then(() => {
+        dialogueBubble.textContent = text;
+        dialogueBubble.classList.add('visible');
+      });
+    }
+
+    function hideDialogue() {
+      dialogueBubble.classList.remove('visible');
+    }
+
+    function setCamera(scale, xPct, yPct) {
+      camera.style.transform = `scale(${scale}) translate(${xPct}%, ${yPct}%)`;
+    }
+
+    /* ==========================================================================
+       PHASE 1: ZIPPER SLIDES ALL THE WAY TO THE BOTTOM
+       PHASE 2: STRAWBERRY PEEL SEPARATES FROM THE BOTTOM UPWARD
+       ========================================================================== */
+    function animateZipperThenBottomUpPeel(duration = 1950) {
+      return new Promise((resolve) => {
+        const startTime = performance.now();
+        zipperSpark.style.opacity = '1';
+
+        function step(now) {
+          const elapsed = now - startTime;
+          const t = Math.min(1, elapsed / duration);
+
+          if (t <= 0.48) {
+            const zipP = t / 0.48;
+            const easeZip = 1 - Math.pow(1 - zipP, 2);
+            const currentZipY = 76 + easeZip * 208;
+
+            zipperPull.setAttribute('transform', `translate(180, ${currentZipY})`);
+            zipperWhiteSlit.setAttribute('y2', String(currentZipY));
+
+            unzipPolygon.setAttribute(
+              'points',
+              `177,74 183,74 183,${currentZipY} 177,${currentZipY}`
+            );
+          } else {
+            const peelP = (t - 0.48) / 0.52;
+            const easePeel = 1 - Math.pow(1 - peelP, 2.8);
+
+            zipperPull.style.opacity = String(Math.max(0, 1 - peelP * 2.5));
+            zipperWhiteSlit.style.opacity = String(Math.max(0, 1 - peelP * 2));
+
+            const bottomHalfWidth = 8 + easePeel * 165;
+            const topHalfWidth = 4 + Math.pow(easePeel, 1.8) * 145;
+            const topRevealY = 286 - easePeel * 214;
+
+            unzipPolygon.setAttribute(
+              'points',
+              `${180 - topHalfWidth},${topRevealY} ${180 + topHalfWidth},${topRevealY} ${180 + bottomHalfWidth},315 ${180 - bottomHalfWidth},315`
+            );
+
+            const liftAngle = easePeel * 42;
+            closedHalfLeft.style.transform = `rotate(${liftAngle}deg)`;
+            closedHalfRight.style.transform = `rotate(${-liftAngle}deg)`;
+            closedShell.style.opacity = String(1 - easePeel);
+
+            wingLeft.style.opacity = String(easePeel);
+            wingRight.style.opacity = String(easePeel);
+            const startInwardAngle = (1 - easePeel) * -28;
+            wingLeft.style.transform = `rotate(${startInwardAngle}deg) scaleX(${0.62 + 0.38 * easePeel})`;
+            wingRight.style.transform = `rotate(${-startInwardAngle}deg) scaleX(${0.62 + 0.38 * easePeel})`;
+          }
+
+          if (t < 1) {
+            requestAnimationFrame(step);
+          } else {
+            closedShell.style.display = 'none';
+            wingLeft.style.transform = '';
+            wingRight.style.transform = '';
+            unzipPolygon.setAttribute('points', '0,0 360,0 360,340 0,340');
+            bunny.classList.add('ears-flapping');
+            resolve();
+          }
+        }
+
+        requestAnimationFrame(step);
+      });
+    }
+
+    /* ==========================================================================
+       BUTTERFLY FLIGHT CHOREOGRAPHY (PICKS PHOTO FROM BOX -> PLACES ON HEART)
+       ========================================================================== */
+    async function runButterflyPhotoDelivery() {
+      butterfly.style.opacity = '1';
+      butterfly.style.left = '60%';
+      butterfly.style.top = '48%';
+      butterfly.style.transform = 'translate(-50%, -50%) scale(1) rotate(12deg)';
+      await wait(1100);
+
+      photoMemory.classList.add('state-from-box');
+      spawnBurst(0.6, 0.52, 16);
+      await wait(600);
+
+      butterfly.style.left = '50%';
+      butterfly.style.top = '23%';
+      butterfly.style.transform = 'translate(-50%, -50%) scale(1.05) rotate(-8deg)';
+      photoMemory.classList.remove('state-from-box');
+      photoMemory.classList.add('state-on-heart');
+      spawnBurst(0.5, 0.31, 24);
+      await wait(1200);
+
+      butterfly.style.left = '108%';
+      butterfly.style.top = '10%';
+      butterfly.style.opacity = '0';
+    }
+
+    /* ==========================================================================
+       SYNCHRONIZED LEFT-RIGHT PAW RUMMAGE & GIFT BOX TILT (SCENE 5)
+       When Left Paw pushes down -> Gift Box tilts Left
+       When Right Paw pushes down -> Gift Box tilts Right
+       ========================================================================== */
+    async function runSynchronizedBoxRummage() {
+      for (let i = 0; i < 3; i++) {
+        // Left hand pushes down -> Box tilts left
+        bunny.classList.remove('push-right');
+        bunny.classList.add('push-left');
+        giftBox.classList.remove('tilt-right');
+        giftBox.classList.add('tilt-left');
+        spawnBurst(0.46, 0.58, 8);
+        await wait(380);
+
+        // Right hand pushes down -> Box tilts right
+        bunny.classList.remove('push-left');
+        bunny.classList.add('push-right');
+        giftBox.classList.remove('tilt-left');
+        giftBox.classList.add('tilt-right');
+        spawnBurst(0.54, 0.58, 8);
+        await wait(380);
+      }
+      bunny.classList.remove('push-left', 'push-right');
+      giftBox.classList.remove('tilt-left', 'tilt-right');
+    }
+
+    /* ==========================================================================
+       BOTANICAL GARDEN GENERATOR
+       ========================================================================== */
+    function createFlowerSVG(type, color) {
+      const stem = `<path d="M30,55 Q28,85 30,115" stroke="#5aa84f" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <path d="M30,88 Q16,78 12,66 Q24,70 30,84" fill="#6bc25e"/>`;
+      if (type === 'tulip') {
+        return `<svg viewBox="0 0 60 120" width="100%" height="100%">
+          ${stem}
+          <path d="M16,35 C16,56 44,56 44,35 C44,20 36,12 36,12 L30,24 L24,12 C24,12 16,20 16,35 Z" fill="${color}" />
+          <path d="M22,36 C22,52 38,52 38,36 C38,24 30,14 30,14 C30,14 22,24 22,36 Z" fill="rgba(255,255,255,0.28)" />
+        </svg>`;
+      }
+      if (type === 'daisy') {
+        return `<svg viewBox="0 0 60 120" width="100%" height="100%">
+          ${stem}
+          <g transform="translate(30,36)">
+            ${[0,45,90,135,180,225,270,315].map(a => `<ellipse cx="0" cy="-14" rx="5.5" ry="11" fill="#ffffff" transform="rotate(${a})"/>`).join('')}
+            <circle cx="0" cy="0" r="8.5" fill="#ffd43b" stroke="#f59f00" stroke-width="1.5"/>
+          </g>
+        </svg>`;
+      }
+      if (type === 'cosmos') {
+        return `<svg viewBox="0 0 60 120" width="100%" height="100%">
+          ${stem}
+          <g transform="translate(30,36)">
+            ${[0,60,120,180,240,300].map(a => `<path d="M0,0 C-7,-18 7,-18 0,0" fill="${color}" transform="rotate(${a}) scale(1.4)"/>`).join('')}
+            <circle cx="0" cy="0" r="5.5" fill="#ffec99"/>
+          </g>
+        </svg>`;
+      }
+      return `<svg viewBox="0 0 60 120" width="100%" height="100%">
+        ${stem}
+        <g fill="#b197fc">
+          <ellipse cx="30" cy="16" rx="4.5" ry="6"/>
+          <ellipse cx="25" cy="25" rx="4.5" ry="6" transform="rotate(-18 25 25)"/>
+          <ellipse cx="35" cy="25" rx="4.5" ry="6" transform="rotate(18 35 25)"/>
+          <ellipse cx="24" cy="36" rx="5" ry="6.5" transform="rotate(-18 24 36)"/>
+          <ellipse cx="36" cy="36" rx="5" ry="6.5" transform="rotate(18 36 36)"/>
+          <ellipse cx="26" cy="47" rx="4.5" ry="6" transform="rotate(-14 26 47)"/>
+          <ellipse cx="34" cy="47" rx="4.5" ry="6" transform="rotate(14 34 47)"/>
+        </g>
+      </svg>`;
+    }
+
+    function populateGarden() {
+      const backContainer = document.getElementById('gardenFlowersBack');
+      const frontContainer = document.getElementById('gardenFlowersFront');
+
+      const backSpecs = [
+        { type: 'tulip', color: '#ff85a2', left: '6%', bottom: '22%', size: 66 },
+        { type: 'daisy', color: '#fff', left: '14%', bottom: '26%', size: 58 },
+        { type: 'lavender', color: '#b197fc', left: '23%', bottom: '25%', size: 64 },
+        { type: 'cosmos', color: '#ffa8c5', left: '75%', bottom: '26%', size: 62 },
+        { type: 'tulip', color: '#ffc078', left: '84%', bottom: '23%', size: 68 },
+        { type: 'daisy', color: '#fff', left: '91%', bottom: '20%', size: 56 }
+      ];
+
+      const frontSpecs = [
+        { type: 'tulip', color: '#ff6b8b', left: '2%', bottom: '-2%', size: 96 },
+        { type: 'daisy', color: '#fff', left: '11%', bottom: '-4%', size: 88 },
+        { type: 'cosmos', color: '#eebefa', left: '20%', bottom: '-5%', size: 84 },
+        { type: 'lavender', color: '#9775fa', left: '78%', bottom: '-4%', size: 92 },
+        { type: 'daisy', color: '#fff', left: '86%', bottom: '-3%', size: 86 },
+        { type: 'tulip', color: '#ffa94d', left: '92%', bottom: '-2%', size: 98 }
+      ];
+
+      backSpecs.forEach((s, idx) => {
+        const el = document.createElement('div');
+        el.className = 'flower-item bud-closed';
+        el.style.left = s.left;
+        el.style.bottom = s.bottom;
+        el.style.width = `${s.size}px`;
+        el.style.height = `${s.size * 1.8}px`;
+        el.style.animationDelay = `${idx * -0.6}s`;
+        el.innerHTML = createFlowerSVG(s.type, s.color);
+        backContainer.appendChild(el);
+      });
+
+      frontSpecs.forEach((s, idx) => {
+        const el = document.createElement('div');
+        el.className = 'flower-item';
+        el.style.left = s.left;
+        el.style.bottom = s.bottom;
+        el.style.width = `${s.size}px`;
+        el.style.height = `${s.size * 1.8}px`;
+        el.style.animationDelay = `${idx * -0.45}s`;
+        el.innerHTML = createFlowerSVG(s.type, s.color);
+        frontContainer.appendChild(el);
+      });
+    }
+
+    function bloomAllFlowers() {
+      document.querySelectorAll('.flower-item.bud-closed').forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.remove('bud-closed');
+          el.classList.add('bloomed');
+        }, i * 130);
+      });
+    }
+
+    /* ==========================================================================
+       FULL-VIEWPORT PARTICLE SYSTEM
+       ========================================================================== */
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    const particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function createParticle(burstX = null, burstY = null) {
+      const isBurst = burstX !== null && burstY !== null;
+      const types = ['heart', 'petal', 'sparkle'];
+      return {
+        x: isBurst ? burstX : Math.random() * canvas.width,
+        y: isBurst ? burstY : canvas.height + 20,
+        vx: isBurst ? (Math.random() - 0.5) * 7 : (Math.random() - 0.5) * 0.9,
+        vy: isBurst ? -Math.random() * 6 - 1.5 : -Math.random() * 1.2 - 0.4,
+        size: Math.random() * 8 + 6,
+        type: types[Math.floor(Math.random() * types.length)],
+        color: ['#ff6b95', '#ff9ebb', '#ffd6e5', '#ffe066'][Math.floor(Math.random() * 4)],
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.04,
+        alpha: 0.88,
+        life: isBurst ? 110 : 999999
+      };
+    }
+
+    for (let i = 0; i < 24; i++) {
+      const p = createParticle();
+      p.y = Math.random() * canvas.height;
+      particles.push(p);
+    }
+
+    function spawnBurst(xRatio, yRatio, count = 22) {
+      const bx = canvas.width * xRatio;
+      const by = canvas.height * yRatio;
+      for (let i = 0; i < count; i++) {
+        particles.push(createParticle(bx, by));
+      }
+    }
+
+    function renderParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vRot;
+        if (p.life < 500) {
+          p.life--;
+          p.alpha = Math.max(0, p.life / 110);
+          if (p.life <= 0) {
+            particles.splice(i, 1);
+            continue;
+          }
+        } else if (p.y < -30) {
+          p.y = canvas.height + 20;
+          p.x = Math.random() * canvas.width;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+
+        if (p.type === 'heart') {
+          const s = p.size * 0.55;
+          ctx.beginPath();
+          ctx.moveTo(0, s);
+          ctx.bezierCurveTo(-s * 1.4, -s * 0.4, -s * 0.7, -s * 1.5, 0, -s * 0.5);
+          ctx.bezierCurveTo(s * 0.7, -s * 1.5, s * 1.4, -s * 0.4, 0, s);
+          ctx.fill();
+        } else if (p.type === 'petal') {
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size * 0.45, p.size * 0.85, 0, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size * 0.28, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+      requestAnimationFrame(renderParticles);
+    }
+
+    /* ==========================================================================
+       SCENE TIMELINE ORCHESTRATION
+       ========================================================================== */
+    async function initIntroScene() {
+      populateGarden();
+      renderParticles();
+      openBtn.textContent = SCRIPT.button;
+
+      await wait(500);
+      await showDialogue(SCRIPT.d1);
+      await wait(1750);
+      await showDialogue(SCRIPT.d2);
+      await wait(900);
+      openBtn.classList.add('ready');
+    }
+
+    async function runFullStory() {
+      if (storyStarted) return;
+      storyStarted = true;
+      openBtn.disabled = true;
+
+      spawnBurst(0.5, 0.85, 20);
+      ctaContainer.style.opacity = '0';
+      ctaContainer.style.transform = 'translateX(-50%) scale(0.8)';
+      setTimeout(() => { ctaContainer.style.display = 'none'; }, 500);
+
+      /* ----------------------------------------------------------------------
+         SCENE 1 -> 2: ENVELOPE OPENS -> FULL ZIPPER DOWN -> BOTTOM-UP PEEL
+         ---------------------------------------------------------------------- */
+      envelope.classList.remove('idle-Invite');
+      setCamera(1.12, 0, 2);
+      envelope.classList.add('open');
+      await wait(800);
+
+      bunny.style.transform = 'translate(-50%, -54%) scale(0.95)';
+      await animateZipperThenBottomUpPeel(1950);
+
+      spawnBurst(0.5, 0.48, 28);
+      bunny.style.transform = 'translate(-50%, -52%) scale(1)';
+      envelope.classList.add('fade-away');
+
+      await showDialogue(SCRIPT.d3);
+      await wait(2700);
+
+      /* ----------------------------------------------------------------------
+         SCENE 2 -> 3: BUNNY RUNS TO GIFT BOX ("Ở đây có 1 hộp quà")
+         + OPENS BOX + BUTTERFLY DELIVERS PHOTO TO HEART -> DOCKS RIGHT
+         ---------------------------------------------------------------------- */
+      await showDialogue(SCRIPT.d4);
+      bunny.classList.add('ears-excited', 'hopping');
+      setCamera(1.05, -3, 0);
+      bloomAllFlowers();
+      await wait(2300);
+
+      // Gift Box appears ahead & bunny announces the gift box
+      bunny.classList.remove('hopping');
+      giftBox.classList.add('visible');
+      bunny.style.left = '42%';
+      bunny.style.transform = 'translate(-50%, -48%) scale(0.96)';
+      setCamera(1.08, -2, -2);
+
+      await showDialogue(SCRIPT.d_box_here);
+      await wait(1650);
+
+      // Bunny unties and opens the gift box
+      bunny.classList.add('opening-box');
+      giftBox.classList.add('react-touch');
+      await wait(550);
+
+      giftBox.classList.add('open');
+      spawnBurst(0.6, 0.55, 26);
+      world.classList.add('warm-bloom');
+      await wait(600);
+
+      // Bunny lifts the glowing heart up high while butterfly places photo onto the heart
+      bunny.classList.remove('opening-box');
+      bunny.style.left = '50%';
+      bunny.classList.add('lifting-gift');
+      // Keep the open gift box visibly resting on the side (DO NOT hide it!)
+      giftBox.classList.add('lower-aside');
+      spawnBurst(0.5, 0.36, 28);
+
+      await runButterflyPhotoDelivery();
+      await wait(900);
+
+      // Move photo to the right margin & scale up slightly
+      photoMemory.classList.remove('state-on-heart');
+      photoMemory.classList.add('state-docked-right');
+
+      /* ----------------------------------------------------------------------
+         SCENE 3 -> 4: "Ở ĐÂY CÓ 1 MẢNH GIẤY NOTE"
+         The Gift Box stays visible (`lower-aside`) while all wish texts appear
+         inside the Note Paper frame and the bunny continuously flaps its ears!
+         ---------------------------------------------------------------------- */
+      bunny.classList.remove('lifting-gift', 'ears-excited');
+      bunny.classList.add('ears-flapping');
+      await showDialogue(SCRIPT.d_note_found);
+      await wait(2200);
+
+      // Position bunny above the Note Paper; Gift Box remains visible at lower-left!
+      setCamera(1, 0, 0);
+      bunny.style.top = '23%';
+      bunny.style.transform = 'translate(-50%, -50%) scale(0.72)';
+      hideDialogue();
+
+      // Open Note Paper frame & reveal all wishes sequentially inside the Note Paper
+      notePaper.classList.add('open');
+      spawnBurst(0.5, 0.58, 18);
+      await wait(650);
+
+      noteLine1.textContent = SCRIPT.d5;
+      noteLine1.classList.add('show');
+      await wait(3100);
+
+      noteLine2.textContent = SCRIPT.d6;
+      noteLine2.classList.add('show');
+      await wait(3100);
+
+      noteLine3.textContent = SCRIPT.d7;
+      noteLine3.classList.add('show');
+      await wait(3200);
+
+      noteLine4.textContent = SCRIPT.d8;
+      noteLine4.classList.add('show');
+      spawnBurst(0.5, 0.55, 22);
+      await wait(4800);
+
+      noteLine5.textContent = SCRIPT.d9;
+      noteLine5.classList.add('show');
+      await wait(4200);
+
+      /* ----------------------------------------------------------------------
+         SCENE 5: FINAL SURPRISE GIFT
+         1. Close Note Paper, scale up Bunny & slide the visible Gift Box to center
+         2. Show dialogue: "Và còn 1 cái gì đó nữa này… 🎁✨" BEFORE rummaging
+         3. Left paw pushes down -> Box tilts Left; Right paw pushes down -> Box tilts Right
+         4. Pull out the Heart, lower it down to chest, wrap curved forearms over the front
+            (with shoulder roots tucked strictly UNDERNEATH the heart) + sway & flap ears!
+         ---------------------------------------------------------------------- */
+      notePaper.classList.remove('open');
+      await wait(650);
+
+      // 1. Scale up Bunny in center & slide the visible Gift Box right in front of Bunny
+      bunny.classList.add('rummaging-center');
+      giftBox.classList.remove('lower-aside');
+      giftBox.classList.add('center-in-front-of-bunny');
+
+      // 2. Display "Và còn 1 cái gì đó nữa này… 🎁✨" before rummaging!
+      await showDialogue(SCRIPT.d_one_more_thing);
+      await wait(2000);
+
+      // 3. Alternating Left/Right hand push into the box with synchronized Left/Right box tilt
+      await runSynchronizedBoxRummage();
+
+      // 4. Pull the glowing heart out of the box first
+      giftBox.classList.remove('center-in-front-of-bunny');
+      giftBox.style.opacity = '0';
+      giftBox.style.transform = 'translate(-50%, 10%) scale(0.4)';
+
+      bunny.classList.remove('rummaging-center');
+      bunny.classList.add('pulling-heart-out');
+      spawnBurst(0.5, 0.45, 26);
+      await wait(950);
+
+      // 5. Lower the heart down to chest & wrap curved forearms in front (shoulders under heart) + sway & flap ears!
+      bunny.classList.remove('pulling-heart-out');
+      bunny.classList.add('ears-flapping', 'hugging-lowered-heart');
+      hugWarmAura.classList.add('active');
+      spawnBurst(0.5, 0.52, 34);
+
+      await showDialogue(SCRIPT.d10);
+      await wait(3800);
+
+      finalLoveText.textContent = SCRIPT.d11;
+      finalSigText.textContent = SCRIPT.signature;
+      finalOverlay.classList.add('show');
+      spawnBurst(0.5, 0.48, 38);
+    }
+
+    openBtn.addEventListener('click', runFullStory, { once: true });
+    window.addEventListener('DOMContentLoaded', initIntroScene);
+  </script>
+</body>
+</html>

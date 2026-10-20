@@ -31,6 +31,7 @@
       background: #ffe5ef;
       font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text-dark);
+      touch-action: manipulation;
     }
 
     /* ==========================================================================
@@ -107,17 +108,17 @@
       border-radius: 50%;
     }
 
-    .cloud-1 { width: 170px; height: 54px; top: 9%; left: 7%; }
-    .cloud-1::before { width: 78px; height: 78px; top: -38px; left: 24px; }
-    .cloud-1::after { width: 62px; height: 62px; top: -26px; left: 82px; }
+    .cloud-1 { width: 150px; height: 48px; top: 10%; left: 5%; }
+    .cloud-1::before { width: 68px; height: 68px; top: -32px; left: 20px; }
+    .cloud-1::after { width: 54px; height: 54px; top: -22px; left: 72px; }
 
-    .cloud-2 { width: 210px; height: 64px; top: 13%; right: 8%; animation-duration: 32s; animation-delay: -6s; }
-    .cloud-2::before { width: 92px; height: 92px; top: -44px; left: 32px; }
-    .cloud-2::after { width: 74px; height: 74px; top: -30px; left: 100px; }
+    .cloud-2 { width: 180px; height: 56px; top: 14%; right: 6%; animation-duration: 32s; animation-delay: -6s; }
+    .cloud-2::before { width: 80px; height: 80px; top: -38px; left: 26px; }
+    .cloud-2::after { width: 64px; height: 64px; top: -26px; left: 86px; }
 
     @keyframes floatCloud {
-      0% { transform: translateX(-18px) translateY(0); }
-      100% { transform: translateX(24px) translateY(-8px); }
+      0% { transform: translateX(-14px) translateY(0); }
+      100% { transform: translateX(18px) translateY(-6px); }
     }
 
     /* ==========================================================================
@@ -133,9 +134,9 @@
 
     .hills-distant {
       position: absolute;
-      bottom: 24%;
-      left: -15%;
-      width: 130%;
+      bottom: 25%;
+      left: -18%;
+      width: 136%;
       height: 36%;
       background: linear-gradient(180deg, #f7d9e8 0%, #e7f4dc 55%, #d6ecc8 100%);
       border-radius: 50% 50% 0 0 / 100% 100% 0 0;
@@ -146,9 +147,9 @@
     .meadow-midground {
       position: absolute;
       bottom: -6%;
-      left: -12%;
-      width: 124%;
-      height: 46%;
+      left: -14%;
+      width: 128%;
+      height: 48%;
       background: radial-gradient(ellipse at 50% 15%, #eef9e3 0%, #d8f0c8 48%, #c2e5b0 100%);
       border-radius: 48% 52% 0 0 / 60% 60% 0 0;
       box-shadow: 0 -10px 32px rgba(170, 210, 150, 0.35), inset 0 18px 38px rgba(255, 255, 255, 0.75);
@@ -160,7 +161,7 @@
       bottom: -4%;
       left: 50%;
       transform: translateX(-50%) perspective(350px) rotateX(52deg);
-      width: min(380px, 68vw);
+      width: min(360px, 78vw);
       height: 46vh;
       background: linear-gradient(180deg, rgba(255, 238, 224, 0.55) 0%, rgba(255, 225, 210, 0.9) 100%);
       border-radius: 50%;
@@ -214,10 +215,10 @@
     /* 1. 3D Envelope */
     #envelopeActor {
       position: absolute;
-      top: 53%;
+      top: 54%;
       left: 50%;
-      width: min(310px, 78vw);
-      height: min(205px, 52vw);
+      width: min(300px, 80vw);
+      height: min(198px, 53vw);
       transform: translate(-50%, -50%);
       transform-style: preserve-3d;
       transition: transform 1s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.9s ease;
@@ -296,16 +297,13 @@
 
     /* ==========================================================================
        2. STRAWBERRY BUNNY ACTOR
-       - Continuous Ear Flapping ("ve vẩy tai liên tục")
-       - Center Rummaging with Left/Right Push
-       - Under-heart Shoulder Roots + Over-heart Curved Forearms + Swaying ("lắc lư")
        ========================================================================== */
     #strawberryBunnyActor {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: min(345px, 85vw);
-      height: min(335px, 83vw);
+      width: min(330px, 82vw);
+      height: min(320px, 80vw);
       transform: translate(-50%, -50%) scale(0.76);
       transition: transform 0.85s cubic-bezier(0.34, 1.45, 0.64, 1), top 0.85s ease, left 0.85s ease;
       z-index: 14;
@@ -329,7 +327,6 @@
       100% { transform: rotate(3deg); }
     }
 
-    /* Two Independent Hooded Strawberry Wings / Ears (Anchored at Crown 180, 74) */
     #sb-wing-left,
     #sb-wing-right {
       transform-origin: 180px 74px;
@@ -347,7 +344,6 @@
       animation: continuousEarFlapRight 1.85s ease-in-out infinite;
     }
 
-    /* Faster Ear Flutter when Running or Rummaging */
     #strawberryBunnyActor.ears-excited #sb-wing-left {
       opacity: 1;
       animation: happyEarFlapLeft 0.95s ease-in-out infinite;
@@ -380,7 +376,6 @@
       50% { transform: rotate(-12deg) translateY(-4px); }
     }
 
-    /* Articulated Bunny Head, Eyes, Regular Arms & Curved Hugging Arms */
     #bunny-head-group {
       transform-origin: 180px 150px;
       transition: transform 0.5s ease;
@@ -396,7 +391,6 @@
       95% { transform: scaleY(0.12); }
     }
 
-    /* Regular Plush Arms */
     #bunny-arm-left {
       transform-origin: 134px 196px;
       transition: transform 0.45s cubic-bezier(0.34, 1.5, 0.64, 1), opacity 0.3s ease;
@@ -454,7 +448,6 @@
     }
 
     /* --- BUNNY ACTION POSES --- */
-    /* Hop & Run */
     #strawberryBunnyActor.hopping {
       animation: bunnyRunHop 0.48s cubic-bezier(0.35, 0, 0.65, 1) infinite alternate;
     }
@@ -464,9 +457,8 @@
       100% { transform: translate(-50%, -62%) scale(1.04, 0.96) rotate(3deg); }
     }
 
-    /* Pose 1: Reaching Out with Both Hands to Untie & Open Gift Box */
     #strawberryBunnyActor.opening-box {
-      transform: translate(-56%, -44%) scale(0.96) rotate(5deg);
+      transform: translate(-56%, -44%) scale(0.94) rotate(5deg);
     }
     #strawberryBunnyActor.opening-box #bunny-head-group {
       transform: translateY(4px) rotate(6deg);
@@ -480,9 +472,8 @@
       transform: rotate(-60deg) translate(10px, -4px);
     }
 
-    /* Pose 2: Lifting & Presenting the Glowing Heart Up High */
     #strawberryBunnyActor.lifting-gift {
-      transform: translate(-50%, -46%) scale(1.03);
+      transform: translate(-50%, -44%) scale(1.0);
       animation: proudBounce 2.2s ease-in-out infinite alternate;
     }
     #strawberryBunnyActor.lifting-gift #bunny-arm-left {
@@ -502,20 +493,19 @@
     }
 
     @keyframes proudBounce {
-      0% { transform: translate(-50%, -45%) scale(1.02); }
-      100% { transform: translate(-50%, -49%) scale(1.05); }
+      0% { transform: translate(-50%, -43%) scale(0.99); }
+      100% { transform: translate(-50%, -47%) scale(1.02); }
     }
 
     /* Pose 3 (SCENE 5): Enlarged Bunny in Center + Left/Right Hand Push into Box! */
     #strawberryBunnyActor.rummaging-center {
-      top: 45%;
+      top: 47%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(1.18);
+      transform: translate(-50%, -50%) scale(1.14);
     }
     #strawberryBunnyActor.rummaging-center #bunny-head-group {
       transform: translateY(6px);
     }
-    /* When Left Hand Pushes Down into the Box */
     #strawberryBunnyActor.push-left #bunny-arm-left {
       animation: none;
       transform: rotate(-68deg) translate(-12px, 24px) scaleY(1.22);
@@ -528,7 +518,6 @@
       transform: translateY(6px) rotate(-5deg);
     }
 
-    /* When Right Hand Pushes Down into the Box */
     #strawberryBunnyActor.push-right #bunny-arm-right {
       animation: none;
       transform: rotate(68deg) translate(12px, 24px) scaleY(1.22);
@@ -543,9 +532,9 @@
 
     /* Step 4A: Pulling Heart Out of the Box High */
     #strawberryBunnyActor.pulling-heart-out {
-      top: 48%;
+      top: 49%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(1.2);
+      transform: translate(-50%, -50%) scale(1.16);
     }
     #strawberryBunnyActor.pulling-heart-out #bunny-arm-left {
       animation: none;
@@ -562,17 +551,15 @@
 
     /* Step 4B: Lowering Heart Down to Chest & Wrapping Curved Forearms Around Front + Swaying! */
     #strawberryBunnyActor.hugging-lowered-heart {
-      top: 50%;
+      top: 52%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(1.24);
+      transform: translate(-50%, -50%) scale(1.18);
       animation: bunnyGentleSway 2.4s ease-in-out infinite alternate;
     }
-    /* Move the heart down onto the bunny's chest/belly */
     #strawberryBunnyActor.hugging-lowered-heart #bunny-held-gift {
       opacity: 1;
       transform: translateY(132px) scale(1.04);
     }
-    /* Hide regular arms, show under-heart shoulder roots + over-heart curved forearms */
     #strawberryBunnyActor.hugging-lowered-heart #bunny-arm-left,
     #strawberryBunnyActor.hugging-lowered-heart #bunny-arm-right {
       opacity: 0;
@@ -592,20 +579,19 @@
     }
 
     @keyframes bunnyGentleSway {
-      0% { transform: translate(-50%, -50%) scale(1.24) rotate(-4.5deg); }
-      100% { transform: translate(-50%, -50%) scale(1.24) rotate(4.5deg); }
+      0% { transform: translate(-50%, -50%) scale(1.18) rotate(-4.5deg); }
+      100% { transform: translate(-50%, -50%) scale(1.18) rotate(4.5deg); }
     }
 
     /* ==========================================================================
        3. 3D GIFT BOX IN THE GARDEN
-       Stays visible during Note Paper scene, then moves to center for Rummaging!
        ========================================================================== */
     #giftBoxActor {
       position: absolute;
       top: 60%;
-      left: 62%;
-      width: min(155px, 39vw);
-      height: min(145px, 37vw);
+      left: 64%;
+      width: min(145px, 36vw);
+      height: min(136px, 34vw);
       transform: translate(-50%, -50%) scale(0);
       opacity: 0;
       transition:
@@ -627,34 +613,32 @@
 
     /* Gift Box stays visibly parked on the lower-left side during the Note Paper scene */
     #giftBoxActor.lower-aside {
-      top: 77%;
+      top: 82%;
       left: clamp(16%, 20vw, 24%);
-      transform: translate(-50%, -50%) scale(0.78);
+      transform: translate(-50%, -50%) scale(0.74);
       opacity: 1;
       z-index: 12;
     }
 
     /* Gift Box Positioned Right in the Middle of the Enlarged Bunny in Scene 5 */
     #giftBoxActor.center-in-front-of-bunny {
-      top: 64%;
+      top: 65%;
       left: 50%;
       opacity: 1;
       z-index: 15;
-      transform: translate(-50%, -50%) scale(1.06);
+      transform: translate(-50%, -50%) scale(1.02);
       transition:
         transform 0.36s cubic-bezier(0.34, 1.45, 0.64, 1),
         left 0.75s cubic-bezier(0.28, 1.2, 0.55, 1),
         top 0.75s cubic-bezier(0.28, 1.2, 0.55, 1);
     }
 
-    /* Left Paw Push -> Box Tilts Slightly to the Left */
     #giftBoxActor.center-in-front-of-bunny.tilt-left {
-      transform: translate(-54%, -47%) scale(1.08, 0.94) rotate(-11deg);
+      transform: translate(-54%, -47%) scale(1.05, 0.92) rotate(-11deg);
     }
 
-    /* Right Paw Push -> Box Tilts Slightly to the Right */
     #giftBoxActor.center-in-front-of-bunny.tilt-right {
-      transform: translate(-46%, -47%) scale(1.08, 0.94) rotate(11deg);
+      transform: translate(-46%, -47%) scale(1.05, 0.92) rotate(11deg);
     }
 
     @keyframes boxSquash {
@@ -683,14 +667,14 @@
     }
 
     /* ==========================================================================
-       4. TEMP WHITE PHOTO FRAME + 3D BUTTERFLY CARRIER
+       4. PORTRAIT COUPLE PHOTO FRAME (3:4 VERTICAL RATIO FOR image_d34da2.jpg)
        ========================================================================== */
     #photoMemoryActor {
       position: absolute;
       top: 60%;
       left: 62%;
-      width: clamp(86px, 20vw, 112px);
-      padding: 7px 7px 18px 7px;
+      width: clamp(84px, 22vw, 114px);
+      padding: 6px 6px 20px 6px;
       background: #ffffff;
       border-radius: 14px;
       border: 2px solid #ffd4e3;
@@ -706,12 +690,13 @@
       pointer-events: none;
     }
 
+    /* Vertical 3:4 Polaroid Frame tailored to the couple portrait photo */
     #photoMemoryActor .photo-inner-wrap {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 3 / 4;
       border-radius: 9px;
       overflow: hidden;
-      background: #ffffff;
+      background: #fff5f8;
       border: 1px solid #ffe8f0;
       display: flex;
       align-items: center;
@@ -723,6 +708,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 18%;
       display: block;
       background: #ffffff;
     }
@@ -732,10 +718,11 @@
       bottom: 3px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 11px;
+      font-size: 10.5px;
       color: #ff4d82;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
     }
 
     #photoMemoryActor.state-from-box {
@@ -747,41 +734,24 @@
 
     #photoMemoryActor.state-on-heart {
       opacity: 1;
-      top: 31%;
+      top: 29%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.95) rotate(0deg);
+      transform: translate(-50%, -50%) scale(0.96) rotate(0deg);
       box-shadow: 0 0 26px rgba(255, 105, 155, 0.65), 0 12px 28px rgba(165, 50, 90, 0.28);
     }
 
     #photoMemoryActor.state-docked-right {
       opacity: 1;
-      top: 46%;
-      left: calc(100vw - clamp(85px, 14vw, 135px));
-      transform: translate(-50%, -50%) scale(1.28) rotate(5deg);
+      top: 44%;
+      left: calc(100vw - clamp(82px, 13vw, 130px));
+      transform: translate(-50%, -50%) scale(1.24) rotate(5deg);
       z-index: 22;
       animation: dockedPhotoFloat 3.6s ease-in-out infinite alternate;
     }
 
     @keyframes dockedPhotoFloat {
-      0% { transform: translate(-50%, -50%) scale(1.28) rotate(4deg) translateY(0px); }
-      100% { transform: translate(-50%, -50%) scale(1.28) rotate(6.5deg) translateY(-8px); }
-    }
-
-    @media (max-width: 640px) {
-      #photoMemoryActor.state-docked-right {
-        top: 22%;
-        left: calc(100vw - 64px);
-        transform: translate(-50%, -50%) scale(1.06) rotate(5deg);
-      }
-      @keyframes dockedPhotoFloat {
-        0% { transform: translate(-50%, -50%) scale(1.06) rotate(4deg) translateY(0px); }
-        100% { transform: translate(-50%, -50%) scale(1.06) rotate(6.5deg) translateY(-6px); }
-      }
-      #giftBoxActor.lower-aside {
-        top: 82%;
-        left: 18%;
-        transform: translate(-50%, -50%) scale(0.65);
-      }
+      0% { transform: translate(-50%, -50%) scale(1.24) rotate(4deg) translateY(0px); }
+      100% { transform: translate(-50%, -50%) scale(1.24) rotate(6.5deg) translateY(-8px); }
     }
 
     /* 3D Animated Butterfly Carrier */
@@ -789,8 +759,8 @@
       position: absolute;
       top: 18%;
       left: -12%;
-      width: 68px;
-      height: 68px;
+      width: 66px;
+      height: 66px;
       transform: translate(-50%, -50%) scale(0.9);
       opacity: 0;
       transition:
@@ -817,9 +787,9 @@
        ========================================================================== */
     #notePaperActor {
       position: absolute;
-      top: 61%;
+      top: 62%;
       left: 50%;
-      width: min(550px, 90vw);
+      width: min(540px, 92vw);
       transform: translate(-50%, -50%) scale(0.25) rotate(-6deg);
       opacity: 0;
       pointer-events: none;
@@ -828,7 +798,7 @@
     }
 
     #notePaperActor.open {
-      transform: translate(-50%, -50%) scale(1) rotate(-0.8deg);
+      transform: translate(-50%, -50%) scale(1) rotate(-0.6deg);
       opacity: 1;
     }
 
@@ -837,16 +807,16 @@
       background:
         repeating-linear-gradient(
           transparent,
-          transparent 29px,
-          rgba(255, 182, 205, 0.28) 29px,
-          rgba(255, 182, 205, 0.28) 30px
+          transparent 27px,
+          rgba(255, 182, 205, 0.25) 27px,
+          rgba(255, 182, 205, 0.25) 28px
         ),
         linear-gradient(175deg, #fffdf7 0%, #fff4f7 100%);
       border: 2px solid #f7c6d8;
       border-radius: 18px 18px 24px 18px;
-      padding: clamp(22px, 4vw, 30px) clamp(16px, 4vw, 30px) clamp(18px, 3.5vw, 26px);
+      padding: clamp(20px, 3.8vw, 28px) clamp(14px, 3.8vw, 28px) clamp(14px, 3vw, 22px);
       box-shadow:
-        0 22px 48px rgba(160, 55, 90, 0.22),
+        0 20px 44px rgba(160, 55, 90, 0.22),
         0 5px 0 #f2bfd0,
         inset 0 2px 10px #ffffff;
       text-align: center;
@@ -857,16 +827,16 @@
       top: -13px;
       left: 50%;
       transform: translateX(-50%) rotate(-2deg);
-      width: 118px;
-      height: 26px;
-      background: rgba(255, 150, 185, 0.72);
-      border-left: 3px dotted rgba(255,255,255,0.8);
-      border-right: 3px dotted rgba(255,255,255,0.8);
+      width: 116px;
+      height: 25px;
+      background: rgba(255, 150, 185, 0.78);
+      border-left: 3px dotted rgba(255,255,255,0.85);
+      border-right: 3px dotted rgba(255,255,255,0.85);
       box-shadow: 0 3px 8px rgba(175, 65, 100, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 0.5px;
@@ -876,9 +846,9 @@
       opacity: 0;
       transform: translateY(8px);
       transition: opacity 0.65s ease, transform 0.65s ease;
-      margin-bottom: 8px;
-      line-height: 1.5;
-      font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+      margin-bottom: 7px;
+      line-height: 1.46;
+      font-size: clamp(0.86rem, 2.4vw, 1.04rem);
       font-weight: 600;
       color: #702943;
     }
@@ -889,13 +859,13 @@
     }
 
     .note-line.note-highlight {
-      font-size: clamp(1rem, 2.9vw, 1.22rem);
+      font-size: clamp(0.95rem, 2.8vw, 1.18rem);
       font-weight: 700;
       color: #b81950;
-      background: rgba(255, 224, 235, 0.65);
+      background: rgba(255, 224, 235, 0.68);
       border-radius: 12px;
-      padding: 8px 12px;
-      margin: 10px 0;
+      padding: 7px 11px;
+      margin: 8px 0;
       box-shadow: inset 0 0 0 1.5px rgba(255, 165, 195, 0.6);
     }
 
@@ -904,10 +874,10 @@
        ========================================================================== */
     #dialogueLayer {
       position: absolute;
-      top: max(16px, env(safe-area-inset-top, 16px));
+      top: max(14px, env(safe-area-inset-top, 14px));
       left: 50%;
       transform: translateX(-50%);
-      width: min(620px, 92vw);
+      width: min(600px, 92vw);
       text-align: center;
       z-index: 25;
       pointer-events: none;
@@ -915,15 +885,15 @@
 
     .dialogue-bubble {
       display: inline-block;
-      background: rgba(255, 252, 254, 0.92);
+      background: rgba(255, 252, 254, 0.93);
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255, 198, 218, 0.92);
-      border-radius: 26px;
-      padding: 13px 22px;
-      box-shadow: 0 14px 32px rgba(175, 70, 105, 0.16), inset 0 2px 4px #ffffff;
-      font-size: clamp(1.02rem, 3.1vw, 1.28rem);
+      border-radius: 24px;
+      padding: 12px 20px;
+      box-shadow: 0 12px 28px rgba(175, 70, 105, 0.16), inset 0 2px 4px #ffffff;
+      font-size: clamp(0.98rem, 3.4vw, 1.25rem);
       font-weight: 700;
-      line-height: 1.48;
+      line-height: 1.45;
       color: var(--text-dark);
       opacity: 0;
       transform: translateY(-12px) scale(0.95);
@@ -937,9 +907,11 @@
 
     #ctaContainer {
       position: absolute;
-      bottom: max(36px, env(safe-area-inset-bottom, 36px));
+      bottom: max(32px, env(safe-area-inset-bottom, 32px));
       left: 50%;
       transform: translateX(-50%);
+      width: 100%;
+      text-align: center;
       z-index: 30;
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
@@ -950,11 +922,11 @@
       border: none;
       outline: none;
       font-family: inherit;
-      font-size: clamp(1.08rem, 3.5vw, 1.28rem);
+      font-size: clamp(1.05rem, 4vw, 1.25rem);
       font-weight: 700;
       color: #ffffff;
       background: linear-gradient(180deg, #ff6996 0%, #ff3e75 100%);
-      padding: 16px 36px;
+      padding: 15px 34px;
       border-radius: 999px;
       box-shadow:
         0 10px 26px rgba(255, 62, 117, 0.42),
@@ -982,7 +954,7 @@
 
     #finalOverlay {
       position: absolute;
-      bottom: max(20px, env(safe-area-inset-bottom, 20px));
+      bottom: max(18px, env(safe-area-inset-bottom, 18px));
       left: 50%;
       transform: translateX(-50%);
       width: 92vw;
@@ -998,16 +970,16 @@
     }
 
     .final-love-line {
-      font-size: clamp(1.22rem, 3.8vw, 1.62rem);
+      font-size: clamp(1.18rem, 4.2vw, 1.58rem);
       font-weight: 700;
       color: #b81d52;
       text-shadow: 0 2px 10px rgba(255, 255, 255, 0.95);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .final-signature {
       font-family: 'Dancing Script', cursive;
-      font-size: clamp(1.5rem, 4.6vw, 2.15rem);
+      font-size: clamp(1.45rem, 5vw, 2.1rem);
       font-weight: 700;
       color: #7d2449;
       text-shadow: 0 2px 8px rgba(255, 255, 255, 0.9);
@@ -1020,6 +992,130 @@
       height: 100%;
       pointer-events: none;
       z-index: 20;
+    }
+
+    /* ==========================================================================
+       PORTRAIT MOBILE RESPONSIVE TUNING (ĐIỆN THOẠI DỌC THẲNG)
+       ========================================================================== */
+    @media (max-width: 640px), (orientation: portrait) and (max-width: 768px) {
+      #envelopeActor {
+        top: 55%;
+        width: min(275px, 76vw);
+        height: min(182px, 50vw);
+      }
+
+      #strawberryBunnyActor {
+        width: min(295px, 78vw);
+        height: min(285px, 76vw);
+      }
+
+      /* Docked Portrait Photo on Vertical Mobile:
+         Positioned neatly on the upper-right margin so it never collides with
+         the Note Paper below or the Bunny in the center! */
+      #photoMemoryActor {
+        width: clamp(78px, 21vw, 96px);
+        padding: 5px 5px 17px 5px;
+      }
+
+      #photoMemoryActor.state-on-heart {
+        top: 29%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.94) rotate(0deg);
+      }
+
+      #photoMemoryActor.state-docked-right {
+        top: 24%;
+        left: calc(100vw - clamp(54px, 14vw, 66px));
+        transform: translate(-50%, -50%) scale(1.08) rotate(5deg);
+      }
+
+      @keyframes dockedPhotoFloat {
+        0% { transform: translate(-50%, -50%) scale(1.08) rotate(4deg) translateY(0px); }
+        100% { transform: translate(-50%, -50%) scale(1.08) rotate(6.5deg) translateY(-6px); }
+      }
+
+      /* Gift box visibly parked at bottom-left during Note Paper scene */
+      #giftBoxActor.lower-aside {
+        top: 86%;
+        left: 19%;
+        transform: translate(-50%, -50%) scale(0.62);
+      }
+
+      /* Note Paper Frame centered cleanly below the Bunny & Photo */
+      #notePaperActor {
+        top: 59%;
+        width: 92vw;
+      }
+
+      .note-sheet {
+        padding: 18px 14px 14px;
+      }
+
+      .note-line {
+        font-size: clamp(0.84rem, 3.4vw, 0.96rem);
+        margin-bottom: 6px;
+        line-height: 1.42;
+      }
+
+      .note-line.note-highlight {
+        font-size: clamp(0.9rem, 3.7vw, 1.04rem);
+        padding: 6px 10px;
+        margin: 7px 0;
+      }
+
+      /* Scene 5 Rummaging & Final Hug scaled for narrow portrait screens */
+      #strawberryBunnyActor.rummaging-center {
+        top: 49%;
+        left: 46%;
+        transform: translate(-50%, -50%) scale(1.06);
+      }
+
+      #giftBoxActor.center-in-front-of-bunny {
+        top: 66%;
+        left: 46%;
+        transform: translate(-50%, -50%) scale(0.95);
+      }
+
+      #strawberryBunnyActor.pulling-heart-out {
+        top: 51%;
+        left: 48%;
+        transform: translate(-50%, -50%) scale(1.08);
+      }
+
+      #strawberryBunnyActor.hugging-lowered-heart {
+        top: 54%;
+        left: 48%;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      @keyframes bunnyGentleSway {
+        0% { transform: translate(-50%, -50%) scale(1.1) rotate(-4deg); }
+        100% { transform: translate(-50%, -50%) scale(1.1) rotate(4deg); }
+      }
+
+      /* Scale down foreground corner flowers slightly on narrow phones */
+      #gardenFlowersFront .flower-item {
+        transform: scale(0.76);
+      }
+    }
+
+    /* Extra compact adjustments for shorter vertical phones (e.g. iPhone SE / 667px height) */
+    @media (max-height: 700px) and (orientation: portrait) {
+      #notePaperActor {
+        top: 61%;
+      }
+      .note-line {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+      }
+      .note-line.note-highlight {
+        font-size: 0.86rem;
+        padding: 5px 8px;
+      }
+      #strawberryBunnyActor.hugging-lowered-heart {
+        top: 53%;
+        transform: translate(-50%, -50%) scale(1.0);
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1101,13 +1197,10 @@
           </svg>
         </div>
 
-        <!-- 3. STRAWBERRY-BUNNY MODEL:
-             - Under-heart Shoulder Roots (#bunny-hug-shoulders-back) sit UNDER the Heart
-             - Over-heart Curved Forearms (#bunny-curved-hug-arms) wrap OVER the front of the Heart -->
+        <!-- 3. STRAWBERRY-BUNNY MODEL -->
         <div id="strawberryBunnyActor">
           <svg id="strawberryBunnySvg" viewBox="0 0 360 340">
             <defs>
-              <!-- Plush Strawberry Red-Pink Outer Gradient -->
               <radialGradient id="strawPlushGrad" cx="38%" cy="30%" r="68%">
                 <stop offset="0%" stop-color="#ff708e" />
                 <stop offset="45%" stop-color="#ff3b63" />
@@ -1115,7 +1208,6 @@
                 <stop offset="100%" stop-color="#bf1137" />
               </radialGradient>
 
-              <!-- Plush Inner Peach-Pink Lining Gradient -->
               <linearGradient id="wingLiningLeft" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#ffe0e7" />
                 <stop offset="55%" stop-color="#ffb5c6" />
@@ -1127,21 +1219,18 @@
                 <stop offset="100%" stop-color="#f593aa" />
               </linearGradient>
 
-              <!-- White Plush Bunny Fur Gradient -->
               <radialGradient id="bunnyPlushGrad" cx="48%" cy="34%" r="64%">
                 <stop offset="0%" stop-color="#ffffff" />
                 <stop offset="68%" stop-color="#fff7f9" />
                 <stop offset="100%" stop-color="#edd4db" />
               </radialGradient>
 
-              <!-- Distinct Plush Arm Gradient -->
               <radialGradient id="bunnyArmGrad" cx="45%" cy="35%" r="68%">
                 <stop offset="0%" stop-color="#ffffff" />
                 <stop offset="65%" stop-color="#fff2f5" />
                 <stop offset="100%" stop-color="#e4c5ce" />
               </radialGradient>
 
-              <!-- User-Space Arm Gradients so Under-Heart Shoulder & Over-Heart Forearm blend 100% seamlessly -->
               <linearGradient id="hugArmGradLeft" gradientUnits="userSpaceOnUse" x1="100" y1="195" x2="178" y2="242">
                 <stop offset="0%" stop-color="#ffffff" />
                 <stop offset="65%" stop-color="#fff2f5" />
@@ -1153,14 +1242,12 @@
                 <stop offset="100%" stop-color="#ead0d7" />
               </linearGradient>
 
-              <!-- Upright Green Strawberry Leaf Gradient -->
               <linearGradient id="leafPlushGrad" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#52b844" />
                 <stop offset="55%" stop-color="#2e8524" />
                 <stop offset="100%" stop-color="#1c5c16" />
               </linearGradient>
 
-              <!-- Glowing Heart Gift Gradient -->
               <radialGradient id="heartGiftGrad" cx="35%" cy="30%" r="68%">
                 <stop offset="0%" stop-color="#fff0f5" />
                 <stop offset="35%" stop-color="#ff7aa8" />
@@ -1168,14 +1255,12 @@
                 <stop offset="100%" stop-color="#c9104f" />
               </radialGradient>
 
-              <!-- Yellow Strawberry Seed inside Recessed Plush Dimple -->
               <g id="plush-seed">
                 <ellipse cx="0" cy="1" rx="5.2" ry="7.8" fill="rgba(155, 10, 42, 0.28)" />
                 <path d="M0,-5.5 C3.2,-1.5 3.6,3.5 0,5.8 C-3.6,3.5 -3.2,-1.5 0,-5.5 Z" fill="#ffda3d" stroke="#f59e0b" stroke-width="0.7" />
                 <ellipse cx="-1" cy="-1" rx="1" ry="2.2" fill="#fff9bf" opacity="0.85" />
               </g>
 
-              <!-- BOTTOM-UP REVEAL CLIP PATH -->
               <clipPath id="bunnyBottomUpClip">
                 <polygon id="unzipRevealPolygon" points="178,74 182,74 182,74 178,74" />
               </clipPath>
@@ -1184,9 +1269,7 @@
             <!-- Ground Shadow under Bunny -->
             <ellipse cx="180" cy="306" rx="84" ry="16" fill="rgba(150, 50, 80, 0.2)" />
 
-            <!-- ============================================================
-                 UPRIGHT GREEN STRAWBERRY LEAVES AT TOP CENTER
-                 ============================================================ -->
+            <!-- Upright Green Strawberry Leaves -->
             <g id="sb-leaves-group">
               <path d="M182,76 C176,40 188,10 204,8 C220,12 226,44 202,76 Z" fill="url(#leafPlushGrad)" stroke="#1b5915" stroke-width="1.5" />
               <path d="M196,18 Q200,46 192,73" stroke="#7ae068" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6" />
@@ -1194,23 +1277,15 @@
               <path d="M172,16 Q174,46 178,74" stroke="#8cf07a" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.7" />
             </g>
 
-            <!-- ============================================================
-                 LAYER 1: WHITE PLUSH BUNNY BODY, HEAD, FEET & UNDER-HEART SHOULDER ROOTS
-                 (Everything in Layer 1 sits strictly UNDERNEATH the Heart!)
-                 ============================================================ -->
+            <!-- LAYER 1: WHITE PLUSH BUNNY BODY, HEAD, FEET & UNDER-HEART SHOULDER ROOTS -->
             <g id="sb-bunny-core" clip-path="url(#bunnyBottomUpClip)">
-              <!-- Plump White Plush Torso -->
               <path d="M128,184 C118,220 120,268 140,284 C162,292 198,292 220,284 C240,268 242,220 232,184 C216,170 144,170 128,184 Z" fill="url(#bunnyPlushGrad)" stroke="#dfc2c9" stroke-width="2" />
               <ellipse cx="180" cy="234" rx="35" ry="38" fill="#ffe6ee" opacity="0.7" />
 
-              <!-- UNDER-HEART SHOULDER ATTACHMENT ROOTS FOR FINAL HUG:
-                   Attaches the arms to the torso UNDERNEATH the lowered heart so the shoulder joint
-                   never overlaps or appears on top of the heart! -->
+              <!-- Under-Heart Shoulder Attachment Roots (Strictly UNDERNEATH the Heart) -->
               <g id="bunny-hug-shoulders-back">
-                <!-- Left Shoulder Root (Tucked underneath the left side of the heart) -->
                 <path d="M142,192 C122,194 102,204 102,222 C102,230 116,232 136,224 Z" fill="url(#hugArmGradLeft)" />
                 <path d="M129,194 C114,198 102,207 102,222" stroke="#d4b2bc" stroke-width="2.2" fill="none" stroke-linecap="round" />
-                <!-- Right Shoulder Root (Tucked underneath the right side of the heart) -->
                 <path d="M218,192 C238,194 258,204 258,222 C258,230 244,232 224,224 Z" fill="url(#hugArmGradRight)" />
                 <path d="M231,194 C246,198 258,207 258,222" stroke="#d4b2bc" stroke-width="2.2" fill="none" stroke-linecap="round" />
               </g>
@@ -1220,11 +1295,9 @@
                 <path d="M180,76 C140,76 110,120 108,158 C106,186 134,197 180,197 C226,197 254,186 252,158 C250,120 220,76 180,76 Z" fill="url(#bunnyPlushGrad)" stroke="#dfc2c9" stroke-width="2" />
                 <path d="M134,191 Q180,201 226,191" stroke="#d9b8c0" stroke-width="2" fill="none" stroke-linecap="round" />
 
-                <!-- Soft Rosy Cheeks -->
                 <ellipse cx="140" cy="164" rx="13" ry="8" fill="#ff9eb6" opacity="0.55" />
                 <ellipse cx="220" cy="164" rx="13" ry="8" fill="#ff9eb6" opacity="0.55" />
 
-                <!-- CLEAR, EXPRESSIVE DARK BURGUNDY EYES WITH CATCHLIGHTS -->
                 <g id="bunny-eyes">
                   <circle cx="154" cy="151" r="8.8" fill="#4f0e17" stroke="#7d1e2b" stroke-width="1.5" />
                   <circle cx="156.6" cy="148.2" r="2.9" fill="#ffffff" />
@@ -1235,7 +1308,6 @@
                   <circle cx="208.5" cy="154" r="1.3" fill="#ffffff" opacity="0.8" />
                 </g>
 
-                <!-- CLEAR PINK HEART NOSE & STITCHED MOUTH -->
                 <g id="bunny-nose-mouth">
                   <path d="M180,161 C175.5,155.5 168.5,158 170.5,164 C172.2,168.8 180,172.5 180,172.5 C180,172.5 187.8,168.8 189.5,164 C191.5,158 184.5,155.5 180,161 Z" fill="#ff859d" stroke="#b83b54" stroke-width="1.6" />
                   <ellipse cx="176" cy="161" rx="2.2" ry="1.2" fill="#ffd6df" opacity="0.85" />
@@ -1243,7 +1315,6 @@
                 </g>
               </g>
 
-              <!-- Chubby Forward-Facing Feet with Pink Paw Pads -->
               <g id="bunny-foot-left">
                 <ellipse cx="146" cy="284" rx="24" ry="20" transform="rotate(-8 146 284)" fill="url(#bunnyPlushGrad)" stroke="#d9b8c0" stroke-width="2" />
                 <ellipse cx="146" cy="291" rx="7" ry="5.2" fill="#f07d70" />
@@ -1260,9 +1331,7 @@
               </g>
             </g>
 
-            <!-- ============================================================
-                 LAYER 2: 2 SEPARATE HOODED STRAWBERRY WINGS / EARS (#sb-wing-left & #sb-wing-right)
-                 ============================================================ -->
+            <!-- LAYER 2: 2 SEPARATE HOODED STRAWBERRY WINGS / EARS -->
             <g id="sb-wing-left">
               <path d="M180,74 C154,108 134,148 112,188 C94,218 58,252 24,268 C42,240 88,162 180,74 Z" fill="rgba(145, 45, 75, 0.16)" transform="translate(4, 3)" />
               <path d="M180,74 C156,112 136,158 110,198 C82,240 50,276 20,268 C48,225 96,138 180,74 Z" fill="url(#wingLiningLeft)" stroke="#f298ae" stroke-width="1.8" />
@@ -1287,11 +1356,7 @@
               <use href="#plush-seed" transform="translate(310, 234) rotate(-30)" />
             </g>
 
-            <!-- ============================================================
-                 LAYER 3: HELD GLOWING HEART GIFT
-                 (Covers the shoulder attachment roots in Layer 1, while the curved
-                 forearms in Layer 4 wrap over the front of this heart!)
-                 ============================================================ -->
+            <!-- LAYER 3: HELD GLOWING HEART GIFT -->
             <g id="bunny-held-gift">
               <circle cx="180" cy="96" r="56" fill="rgba(255, 230, 240, 0.58)" filter="blur(8px)" />
               <circle cx="142" cy="108" r="9" fill="#fff6a8" stroke="#ffffff" stroke-width="3" />
@@ -1300,14 +1365,8 @@
               <ellipse cx="154" cy="70" rx="9" ry="5" transform="rotate(-28 154 70)" fill="rgba(255,255,255,0.75)" />
             </g>
 
-            <!-- ============================================================
-                 LAYER 4: REGULAR ARMS + OVER-HEART CURVED FOREARMS
-                 Note: In #bunny-curved-hug-arms, ONLY the curved forearm from the
-                 outer edge of the heart inward is drawn here so the shoulder attachment
-                 stays 100% underneath the heart!
-                 ============================================================ -->
+            <!-- LAYER 4: REGULAR ARMS + OVER-HEART CURVED FOREARMS -->
             <g id="bunny-arms-front-layer" clip-path="url(#bunnyBottomUpClip)">
-              <!-- Regular Plush Arms (Hidden during final heart hug) -->
               <g id="bunny-arm-left">
                 <path d="M134,191 C106,196 84,218 92,235 C100,248 124,238 142,216 Z" fill="rgba(160, 75, 95, 0.18)" transform="translate(0, 4)" />
                 <path d="M134,191 C106,196 84,218 92,235 C100,248 124,238 142,216 Z" fill="url(#bunnyArmGrad)" stroke="#d4b2bc" stroke-width="2.2" />
@@ -1320,35 +1379,24 @@
                 <ellipse cx="255" cy="228" rx="6" ry="4.2" transform="rotate(25 255 228)" fill="#f598a8" opacity="0.8" />
               </g>
 
-              <!-- Over-Heart Curved Forearms & Paws (Wraps from outside the heart across the front, slightly curved in the middle) -->
               <g id="bunny-curved-hug-arms">
-                <!-- Left Curved Forearm wrapping over front of Heart -->
                 <g id="curved-arm-left">
-                  <!-- Soft drop shadow on the front of the heart -->
                   <path d="M126,216 C142,222 154,221 168,221 C180,221 180,241 166,242 C136,245 102,238 102,220 Z" fill="rgba(140, 25, 60, 0.22)" transform="translate(0, 4)" />
-                  <!-- Seamless Forearm Fill (Starts from outer elbow x=102 outside the heart, never touches upper shoulder!) -->
                   <path d="M102,218 C102,238 136,245 166,242 C180,241 180,221 168,221 C152,221 138,222 124,215 Z" fill="url(#hugArmGradLeft)" />
-                  <!-- Outer & Front Contour Stroke (Open at outer elbow top so it joins the under-heart shoulder with zero seam) -->
                   <path d="M102,218 C102,238 136,245 166,242 C180,241 180,221 168,221 C152,221 140,222 127,216" stroke="#d4b2bc" stroke-width="2.2" fill="none" stroke-linecap="round" />
                   <ellipse cx="165" cy="231.5" rx="6.5" ry="4.5" fill="#f598a8" opacity="0.85" />
                 </g>
 
-                <!-- Right Curved Forearm wrapping over front of Heart -->
                 <g id="curved-arm-right">
-                  <!-- Soft drop shadow on the front of the heart -->
                   <path d="M234,216 C218,222 206,221 192,221 C180,221 180,241 194,242 C224,245 258,238 258,220 Z" fill="rgba(140, 25, 60, 0.22)" transform="translate(0, 4)" />
-                  <!-- Seamless Forearm Fill -->
                   <path d="M258,218 C258,238 224,245 194,242 C180,241 180,221 192,221 C208,221 222,222 236,215 Z" fill="url(#hugArmGradRight)" />
-                  <!-- Outer & Front Contour Stroke -->
                   <path d="M258,218 C258,238 224,245 194,242 C180,241 180,221 192,221 C208,221 220,222 233,216" stroke="#d4b2bc" stroke-width="2.2" fill="none" stroke-linecap="round" />
                   <ellipse cx="195" cy="231.5" rx="6.5" ry="4.5" fill="#f598a8" opacity="0.85" />
                 </g>
               </g>
             </g>
 
-            <!-- ============================================================
-                 LAYER 5: CLOSED STRAWBERRY SHELL HALVES + FULL-LENGTH ZIPPER
-                 ============================================================ -->
+            <!-- LAYER 5: CLOSED STRAWBERRY SHELL HALVES + FULL-LENGTH ZIPPER -->
             <g id="sb-closed-shell">
               <g id="closed-half-left" style="transform-origin: 180px 74px;">
                 <path d="M180,72 C124,72 104,118 106,182 C108,248 132,286 180,286 L180,72 Z" fill="url(#strawPlushGrad)" stroke="#c7143e" stroke-width="1.8" />
@@ -1383,14 +1431,14 @@
           </svg>
         </div>
 
-        <!-- 4. TEMP WHITE PHOTO FRAME (Picked from Gift Box by Butterfly -> Placed on Heart -> Docked Right) -->
+        <!-- 4. PORTRAIT COUPLE PHOTO FRAME (Supports both image_d34da2.jpg & photo.jpg) -->
         <div id="photoMemoryActor">
           <div class="photo-inner-wrap">
             <img
               id="memoryPhotoImg"
-              src="photo.jpg"
-              alt="Kỷ niệm ngọt ngào"
-              onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22 viewBox=%220 0 400 400%22><rect width=%22400%22 height=%22400%22 fill=%22%23ffffff%22/><circle cx=%22200%22 cy=%22190%22 r=%2250%22 fill=%22%23fff2f6%22/><path d=%22M200 218 C200 218 168 196 168 176 C168 164 178 156 190 160 C196 162 200 168 200 168 C200 168 204 162 210 160 C222 156 232 164 232 176 C232 196 200 218 200 218 Z%22 fill=%22%23ffb8d0%22/></svg>';"
+              src="image_d34da2.jpg"
+              alt="Khoảnh khắc ngọt ngào của hai đứa"
+              onerror="if (!this.dataset.triedAlt) { this.dataset.triedAlt = '1'; this.src = 'photo.jpg'; } else { this.onerror = null; this.src = 'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22 viewBox=%220 0 300 400%22><rect width=%22300%22 height=%22400%22 fill=%22%23fff5f8%22/><circle cx=%22150%22 cy=%22185%22 r=%2252%22 fill=%22%23ffe3ec%22/><path d=%22M150 215 C150 215 116 192 116 170 C116 156 128 148 140 152 C146 154 150 161 150 161 C150 161 154 154 160 152 C172 148 184 156 184 170 C184 192 150 215 150 215 Z%22 fill=%22%23ff85a8%22/></svg>'; }"
             />
           </div>
           <span class="photo-caption-heart">♡ 20/10 ♡</span>
@@ -1419,7 +1467,7 @@
           </svg>
         </div>
 
-        <!-- 6. NOTE PAPER FRAME (#notePaperActor) - Holds all the wish texts! -->
+        <!-- 6. NOTE PAPER FRAME (#notePaperActor) -->
         <div id="notePaperActor">
           <div class="note-sheet">
             <div class="note-washi-tape">📝 Giấy Note ♡</div>
@@ -1476,11 +1524,11 @@
       d_one_more_thing: "Và còn 1 cái gì đó nữa này… 🎁✨",
       d10: "Và món quà cuối cùng… là một cái ôm thật chặt từ anh dành cho em. 🐰💗",
       d11: "Yêu em nhiều nhiều! 💗",
-      signature: "From anh, with love ♡"
+      signature: "From embe Thành, with love ♡💗💗💗"
     });
 
     /* ==========================================================================
-       DOM ELEMENTS
+       DOM ELEMENTS & RESPONSIVE HELPERS
        ========================================================================== */
     const world = document.getElementById('viewportWorld');
     const hugWarmAura = document.getElementById('hugWarmAura');
@@ -1505,7 +1553,6 @@
     const finalLoveText = document.getElementById('finalLoveText');
     const finalSigText = document.getElementById('finalSignatureText');
 
-    // Strawberry Bunny Zipper & Bottom-Up Peel Elements
     const unzipPolygon = document.getElementById('unzipRevealPolygon');
     const zipperPull = document.getElementById('sb-zipper-pull');
     const zipperSpark = document.getElementById('zipper-spark');
@@ -1518,6 +1565,10 @@
 
     let storyStarted = false;
     const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    function isPortraitMobile() {
+      return window.innerWidth <= 640 || (window.innerHeight > window.innerWidth && window.innerWidth <= 768);
+    }
 
     function showDialogue(text) {
       dialogueBubble.classList.remove('visible');
@@ -1619,12 +1670,12 @@
       await wait(600);
 
       butterfly.style.left = '50%';
-      butterfly.style.top = '23%';
+      butterfly.style.top = '22%';
       butterfly.style.transform = 'translate(-50%, -50%) scale(1.05) rotate(-8deg)';
       photoMemory.classList.remove('state-from-box');
       photoMemory.classList.add('state-on-heart');
-      spawnBurst(0.5, 0.31, 24);
-      await wait(1200);
+      spawnBurst(0.5, 0.29, 24);
+      await wait(1250);
 
       butterfly.style.left = '108%';
       butterfly.style.top = '10%';
@@ -1633,12 +1684,9 @@
 
     /* ==========================================================================
        SYNCHRONIZED LEFT-RIGHT PAW RUMMAGE & GIFT BOX TILT (SCENE 5)
-       When Left Paw pushes down -> Gift Box tilts Left
-       When Right Paw pushes down -> Gift Box tilts Right
        ========================================================================== */
     async function runSynchronizedBoxRummage() {
       for (let i = 0; i < 3; i++) {
-        // Left hand pushes down -> Box tilts left
         bunny.classList.remove('push-right');
         bunny.classList.add('push-left');
         giftBox.classList.remove('tilt-right');
@@ -1646,7 +1694,6 @@
         spawnBurst(0.46, 0.58, 8);
         await wait(380);
 
-        // Right hand pushes down -> Box tilts right
         bunny.classList.remove('push-left');
         bunny.classList.add('push-right');
         giftBox.classList.remove('tilt-left');
@@ -1708,21 +1755,21 @@
       const frontContainer = document.getElementById('gardenFlowersFront');
 
       const backSpecs = [
-        { type: 'tulip', color: '#ff85a2', left: '6%', bottom: '22%', size: 66 },
-        { type: 'daisy', color: '#fff', left: '14%', bottom: '26%', size: 58 },
-        { type: 'lavender', color: '#b197fc', left: '23%', bottom: '25%', size: 64 },
-        { type: 'cosmos', color: '#ffa8c5', left: '75%', bottom: '26%', size: 62 },
-        { type: 'tulip', color: '#ffc078', left: '84%', bottom: '23%', size: 68 },
-        { type: 'daisy', color: '#fff', left: '91%', bottom: '20%', size: 56 }
+        { type: 'tulip', color: '#ff85a2', left: '5%', bottom: '23%', size: 60 },
+        { type: 'daisy', color: '#fff', left: '14%', bottom: '26%', size: 54 },
+        { type: 'lavender', color: '#b197fc', left: '23%', bottom: '25%', size: 58 },
+        { type: 'cosmos', color: '#ffa8c5', left: '75%', bottom: '26%', size: 56 },
+        { type: 'tulip', color: '#ffc078', left: '84%', bottom: '23%', size: 62 },
+        { type: 'daisy', color: '#fff', left: '91%', bottom: '20%', size: 52 }
       ];
 
       const frontSpecs = [
-        { type: 'tulip', color: '#ff6b8b', left: '2%', bottom: '-2%', size: 96 },
-        { type: 'daisy', color: '#fff', left: '11%', bottom: '-4%', size: 88 },
-        { type: 'cosmos', color: '#eebefa', left: '20%', bottom: '-5%', size: 84 },
-        { type: 'lavender', color: '#9775fa', left: '78%', bottom: '-4%', size: 92 },
-        { type: 'daisy', color: '#fff', left: '86%', bottom: '-3%', size: 86 },
-        { type: 'tulip', color: '#ffa94d', left: '92%', bottom: '-2%', size: 98 }
+        { type: 'tulip', color: '#ff6b8b', left: '1%', bottom: '-3%', size: 86 },
+        { type: 'daisy', color: '#fff', left: '10%', bottom: '-5%', size: 78 },
+        { type: 'cosmos', color: '#eebefa', left: '20%', bottom: '-6%', size: 76 },
+        { type: 'lavender', color: '#9775fa', left: '78%', bottom: '-5%', size: 82 },
+        { type: 'daisy', color: '#fff', left: '86%', bottom: '-4%', size: 78 },
+        { type: 'tulip', color: '#ffa94d', left: '92%', bottom: '-3%', size: 88 }
       ];
 
       backSpecs.forEach((s, idx) => {
@@ -1791,7 +1838,7 @@
       };
     }
 
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; i < 22; i++) {
       const p = createParticle();
       p.y = Math.random() * canvas.height;
       particles.push(p);
@@ -1881,15 +1928,15 @@
          SCENE 1 -> 2: ENVELOPE OPENS -> FULL ZIPPER DOWN -> BOTTOM-UP PEEL
          ---------------------------------------------------------------------- */
       envelope.classList.remove('idle-Invite');
-      setCamera(1.12, 0, 2);
+      setCamera(1.08, 0, 2);
       envelope.classList.add('open');
       await wait(800);
 
-      bunny.style.transform = 'translate(-50%, -54%) scale(0.95)';
+      bunny.style.transform = 'translate(-50%, -52%) scale(0.92)';
       await animateZipperThenBottomUpPeel(1950);
 
       spawnBurst(0.5, 0.48, 28);
-      bunny.style.transform = 'translate(-50%, -52%) scale(1)';
+      bunny.style.transform = 'translate(-50%, -50%) scale(0.98)';
       envelope.classList.add('fade-away');
 
       await showDialogue(SCRIPT.d3);
@@ -1897,20 +1944,19 @@
 
       /* ----------------------------------------------------------------------
          SCENE 2 -> 3: BUNNY RUNS TO GIFT BOX ("Ở đây có 1 hộp quà")
-         + OPENS BOX + BUTTERFLY DELIVERS PHOTO TO HEART -> DOCKS RIGHT
+         + OPENS BOX + BUTTERFLY DELIVERS COUPLE PHOTO TO HEART -> DOCKS RIGHT
          ---------------------------------------------------------------------- */
       await showDialogue(SCRIPT.d4);
       bunny.classList.add('ears-excited', 'hopping');
-      setCamera(1.05, -3, 0);
+      setCamera(1.04, -2, 0);
       bloomAllFlowers();
       await wait(2300);
 
-      // Gift Box appears ahead & bunny announces the gift box
       bunny.classList.remove('hopping');
       giftBox.classList.add('visible');
-      bunny.style.left = '42%';
-      bunny.style.transform = 'translate(-50%, -48%) scale(0.96)';
-      setCamera(1.08, -2, -2);
+      bunny.style.left = isPortraitMobile() ? '38%' : '42%';
+      bunny.style.transform = 'translate(-50%, -48%) scale(0.92)';
+      setCamera(1.05, -1, -1);
 
       await showDialogue(SCRIPT.d_box_here);
       await wait(1650);
@@ -1929,12 +1975,11 @@
       bunny.classList.remove('opening-box');
       bunny.style.left = '50%';
       bunny.classList.add('lifting-gift');
-      // Keep the open gift box visibly resting on the side (DO NOT hide it!)
       giftBox.classList.add('lower-aside');
       spawnBurst(0.5, 0.36, 28);
 
       await runButterflyPhotoDelivery();
-      await wait(900);
+      await wait(950);
 
       // Move photo to the right margin & scale up slightly
       photoMemory.classList.remove('state-on-heart');
@@ -1942,18 +1987,20 @@
 
       /* ----------------------------------------------------------------------
          SCENE 3 -> 4: "Ở ĐÂY CÓ 1 MẢNH GIẤY NOTE"
-         The Gift Box stays visible (`lower-aside`) while all wish texts appear
-         inside the Note Paper frame and the bunny continuously flaps its ears!
+         On Portrait Mobile, Bunny sits at top-left (34%) while the Couple Photo
+         is docked at top-right (78%), leaving the middle clean for the Note Paper!
          ---------------------------------------------------------------------- */
       bunny.classList.remove('lifting-gift', 'ears-excited');
       bunny.classList.add('ears-flapping');
       await showDialogue(SCRIPT.d_note_found);
       await wait(2200);
 
-      // Position bunny above the Note Paper; Gift Box remains visible at lower-left!
       setCamera(1, 0, 0);
-      bunny.style.top = '23%';
-      bunny.style.transform = 'translate(-50%, -50%) scale(0.72)';
+      bunny.style.top = isPortraitMobile() ? '24%' : '23%';
+      bunny.style.left = isPortraitMobile() ? '34%' : '50%';
+      bunny.style.transform = isPortraitMobile()
+        ? 'translate(-50%, -50%) scale(0.66)'
+        : 'translate(-50%, -50%) scale(0.72)';
       hideDialogue();
 
       // Open Note Paper frame & reveal all wishes sequentially inside the Note Paper
@@ -1993,19 +2040,20 @@
       notePaper.classList.remove('open');
       await wait(650);
 
-      // 1. Scale up Bunny in center & slide the visible Gift Box right in front of Bunny
+      // Clear inline top/left overrides so CSS classes control Scene 5 positioning cleanly
+      bunny.style.top = '';
+      bunny.style.left = '';
+      bunny.style.transform = '';
+
       bunny.classList.add('rummaging-center');
       giftBox.classList.remove('lower-aside');
       giftBox.classList.add('center-in-front-of-bunny');
 
-      // 2. Display "Và còn 1 cái gì đó nữa này… 🎁✨" before rummaging!
       await showDialogue(SCRIPT.d_one_more_thing);
       await wait(2000);
 
-      // 3. Alternating Left/Right hand push into the box with synchronized Left/Right box tilt
       await runSynchronizedBoxRummage();
 
-      // 4. Pull the glowing heart out of the box first
       giftBox.classList.remove('center-in-front-of-bunny');
       giftBox.style.opacity = '0';
       giftBox.style.transform = 'translate(-50%, 10%) scale(0.4)';
@@ -2015,7 +2063,6 @@
       spawnBurst(0.5, 0.45, 26);
       await wait(950);
 
-      // 5. Lower the heart down to chest & wrap curved forearms in front (shoulders under heart) + sway & flap ears!
       bunny.classList.remove('pulling-heart-out');
       bunny.classList.add('ears-flapping', 'hugging-lowered-heart');
       hugWarmAura.classList.add('active');
